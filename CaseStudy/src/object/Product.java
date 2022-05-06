@@ -1,4 +1,4 @@
-package user;
+package object;
 
 public class Product {
     private  int productid;
