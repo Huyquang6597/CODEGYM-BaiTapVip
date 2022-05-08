@@ -1,4 +1,4 @@
-package registerandlogin;
+package account;
 
 public class User {
     private String userName;
@@ -27,4 +27,6 @@ public class User {
     public void setPassWord(String passWord) {
         this.passWord = passWord;
     }
+
+
 }

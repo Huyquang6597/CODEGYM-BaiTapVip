@@ -27,7 +27,7 @@ public class ManageProduct {
         for (int i = 0; i < productList.size(); i++) {
             System.out.println(productList.get(i));
         }
-        System.out.println("--------------------");
+        System.out.println("-----------------------------------");
     }
 
     public int findIndexById(int id) {

@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0abdb665-91db-438d-a595-500db343ec8e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/registerandlogin/ManageUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/registerandlogin/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CaseStudy2131241/CaseStudy.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/file/ReađAnWrite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/validate/DetailValidate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/validate/Validate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file/FileProductCSV.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/manage/ManageProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manage/ManageProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/object/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/object/OrderDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/object/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/object/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/object/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/registerandlogin/ManageUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manage/ManageUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/registerandlogin/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/registerandlogin/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +98,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/file" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
       <module name="untitled104" />
@@ -109,6 +114,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="untitled104" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main (1)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -118,7 +145,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651811422240</updated>
-      <workItem from="1651811423255" duration="11815000" />
+      <workItem from="1651811423255" duration="30955000" />
     </task>
     <servers />
   </component>

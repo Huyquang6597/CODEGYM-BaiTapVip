@@ -68,4 +68,16 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "Ma san pham: " + productid +
+                ", Ten san pham: '" + productName + '\'' +
+                ", Ngay san xuat: " + manufactureDate +
+                ", Han su dung: " + expireDate +
+                ", So luong: " + quantity +
+                ", Mo ta san pham: '" + description + '\'' +
+                '}';
+    }
 }
