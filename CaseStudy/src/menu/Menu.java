@@ -21,8 +21,8 @@ public class Menu {
         str = """
                 ==================Menu==================|
                 ----------------------------------------|
-                1. Dang nhap                            |
-                0. Thoat                                |
+                1. Log In                               |
+                0. Exit                                 |
                                                         |
                 ========================================|
                 """;
@@ -30,16 +30,20 @@ public class Menu {
         choice = scanner.nextInt();
         switch (choice) {
             case 1:
-                System.out.println("Dang nhap");
-                System.out.println("Nhap vao UserName: ");
-                String username = scanner.nextLine();
+                System.out.println("Log In ");
+                System.out.println("Enter UserName: ");
                 scanner.nextLine();
-                System.out.println("Nhap vao PassWord: ");
+                String username = scanner.nextLine();
+                System.out.println("Enter PassWord: ");
                 String password = scanner.nextLine();
                 if (username.equals("admin") && password.equals("123"))
+                {
                     manageUser.login(username, password);
-                System.out.println("Dang nhap thanh cong");
-                menuProduct();
+                    System.out.println("Logged in successfully");
+                    menuProduct();
+                } else {
+                    System.out.println("Wrong account or password, please re-enter");
+                }
                 break;
 
             case 2:
@@ -53,11 +57,11 @@ public class Menu {
         str = """
                 ==================Menu==================|
                 ----------------------------------------|
-                1. Xem thong tin                        |
-                2. Doi Mat khau                         |   
+                1. Display Information                  |
+                2. Change Password                      |   
                 0. Log Out                              |
                                                         |
-                Moi nhap lua chon                       |
+                Please enter options                    |
                                                         |
                 ========================================|
                 """;
@@ -68,7 +72,7 @@ public class Menu {
                 manageUser.display();
                 break;
             case 2:
-                System.out.println("Nhap mat khau moi: ");
+                System.out.println("Enter new passwpord: ");
                 scanner.nextLine();
                 String newPass = scanner.nextLine();
                 manageUser.currentUser.setPassWord(newPass);
@@ -83,16 +87,16 @@ public class Menu {
         str = """
                 ==================Menu==================|
                 ----------------------------------------|
-                1. Hien thi san pham                    |
-                2. Them san pham                        |
-                3. Sua san pham                         |
-                4. Xoa san pham                         |
-                5. Tim kiem san pham                    |
+                1. Display all products                 |
+                2. Add new products                     |
+                3. Edit products                        |
+                4. Delete products                      |
+                5. Search products                      |
                 6. Hien thi danh sach don hang          |
                                                         |
-                0. Thoat                                |
+                0. Exit                                 |
                                                         |
-                Nhap vao lua chon tu 1-6, 0 de thoat    |
+                Enter selection from 1 to 6, 0 to exit  |
                                                         |
                 ========================================|
                 """;
@@ -117,7 +121,7 @@ public class Menu {
             case 6:
                 break;
             default:
-                System.exit(0);
+                menuMain();
 
         }
 
@@ -129,71 +133,73 @@ public class Menu {
     }
 
     public void menuAdd() {
-        System.out.println("Nhap ma Sp: ");
+        System.out.println("Enter product Id: ");
         int productId1 = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Nhap ten Sp: ");
+        System.out.println("Enter product name: ");
         String productName = scanner.nextLine();
 
-        System.out.println("Nhap ngay san xuat: ");
+        System.out.println("Enter product manufacture date: ");
         int manufactureDate = scanner.nextInt();
-        System.out.println("Nhap han su dung: ");
+        scanner.nextLine();
+        System.out.println("Enter the expiration date: ");
         int expireDate = scanner.nextInt();
-        System.out.println("Nhap so luong: ");
+        scanner.nextLine();
+        System.out.println("Enter product quantity: ");
         int quantity = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("Nhap mo ta san pham: ");
+        System.out.println("Enter product description: ");
         String description = scanner.nextLine();
 
         manageProduct.add(new Product(productId1, productName, manufactureDate, expireDate, quantity, description));
-        System.out.println("Da them thanh cong!");
+        System.out.println("Successfully added !");
         menuProduct();
     }
 
     public void menuEdit() {
-        System.out.println("Nhap vao ma hang hoa can sua: ");
+        System.out.println("Enter product id to edit: ");
         int editId = scanner.nextInt();
         int a = manageProduct.findIndexById(editId);
         if (a != -1) {
-            System.out.println("Nhap ma san pham: ");
+            System.out.println("Enter product Id: ");
             int productId2 = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Nhap ten Sp: ");
+            System.out.println("Enter product name: ");
             String productName = scanner.nextLine();
-            System.out.println("Nhap ngay san xuat: ");
+            System.out.println("Enter product manufacture date: ");
             int manufactureDate = scanner.nextInt();
-            System.out.println("Nhap han su dung: ");
+            System.out.println("Enter the expiration date: ");
             int expireDate = scanner.nextInt();
-            System.out.println("Nhap so luong: ");
+            System.out.println("Enter product quantity: ");
             int quantity = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Nhap mo ta san pham: ");
+            System.out.println("Enter product description: ");
             String description = scanner.nextLine();
             manageProduct.edit(editId, new Product(productId2, productName, manufactureDate, expireDate, quantity, description));
             menuProduct();
         } else {
-            System.out.println("Khong tim thay ma san pham");
+            System.out.println("No product id found !");
         }
         menuProduct();
     }
 
     public void menuDelete() {
-        System.out.println("Nhap ma san pham muon xoa: ");
+        System.out.println("Enter product id to delete: ");
         scanner.nextLine();
         int productId = scanner.nextInt();
-        System.out.println("Xoa san pham thanh cong");
+        System.out.println("Delete product successfully !");
         manageProduct.delete(productId);
     }
 
     public void menuFindById() {
-        System.out.println("Nhap vao ma san pham muon tim kiem: ");
+        System.out.println("Enter product id to search: ");
         scanner.nextLine();
         int productId = scanner.nextInt();
         int a = manageProduct.findIndexById(productId);
         if (a != -1) {
             System.out.println(manageProduct.getProductList().get(a));
         } else {
-            System.out.println("Khong tim thay ma san pham");
+            System.out.println("No product id found !");
         }
         menuProduct();
 

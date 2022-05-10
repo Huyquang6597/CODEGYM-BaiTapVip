@@ -72,12 +72,12 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "Ma san pham: " + productid +
-                ", Ten san pham: '" + productName + '\'' +
-                ", Ngay san xuat: " + manufactureDate +
-                ", Han su dung: " + expireDate +
-                ", So luong: " + quantity +
-                ", Mo ta san pham: '" + description + '\'' +
+                "Product Id: " + productid +
+                ", Product name: '" + productName + '\'' +
+                ", Product manufacture date: " + manufactureDate +
+                ", Product expiration date: " + expireDate +
+                ", Product quantity: " + quantity +
+                ", Product description: '" + description + '\'' +
                 '}';
     }
 }
