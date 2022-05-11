@@ -6,12 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageUser {
+
+    public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+    public static final String NOT_VALID_PASS_MESSAGE =
+            "Nhập Password chưa đúng định dạng!!!\n" +
+                    "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
+                    "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
+
     List<User> userList = new ArrayList<>();
     public static User currentUser = null;
     int count = 0;
 
 
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return userList;
     }
 
@@ -27,32 +34,31 @@ public class ManageUser {
         boolean check = false;
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));
-            check = true;
+//            check = true;
         }
-        if (check == false) {
-            System.out.println("Chua co tai khoan!");
-        }
+//        if (check == false) {
+//            System.out.println("Chua co tai khoan!");
+//        }
     }
 
     public int login(String username, String password) {
-//        if (count == 0) {
-//            System.out.println("Ban chua co tai khoan , moi dang ky tai khoan!");
-//        } else {
-//            for (int i = 0; i < userList.size(); i++) {
-//                if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassWord().equals(password)) {
-//                    System.out.println("Dang nhap thanh cong");
-//                }
+
+            for (int i = 0; i < userList.size(); i++) {
+                if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassWord().equals(password)) {
+                    System.out.println("Logged in successfully");
+
+                }
 //                if (userList.get(i).getUserName().equals(username) || userList.get(i).getPassWord().equals(password)) {
-//                    System.out.println("Khong dung tai khoan dang nhap");
+//                    System.out.println("Enter wrong username or password, please re-enter !");
 //                }
-//            }
-//        }
-        for (User user : userList){
-            if (user.getUserName().equals(username) && user.getPassWord().equals(password)){
+            }
+        for (User user : userList) {
+            if (user.getUserName().equals(username) && user.getPassWord().equals(password)) {
                 currentUser = user;
                 return 1;
             }
-        } return 0;
+        }
+        return 0;
     }
 
     public void editUserName(String username, String password, User user) {
@@ -61,10 +67,10 @@ public class ManageUser {
         } else {
             int indexOfUserName = findByUserName(username, password);
             if (indexOfUserName == -1) {
-                System.out.println("Nhap sai tai khoan , vui long nhap lai!");
+                System.out.println("Enter the wrong username or password, please re-enter !");
             } else {
                 userList.set(findByUserName(username, password), user);
-                System.out.println("Thay mat khau thanh cong!");
+                System.out.println("Change password successfull !");
             }
         }
     }
@@ -77,19 +83,20 @@ public class ManageUser {
         }
         return -1;
     }
-    public int findIndexById(int id){
-        for (int i  = 0 ; i < userList.size(); i++){
+
+    public int findIndexById(int id) {
+        for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));
             return i;
         }
         return -1;
     }
 
-    public void edit(int id , User user){
-        userList.set(findIndexById(id),user);
+    public void edit(int id, User user) {
+        userList.set(findIndexById(id), user);
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         userList.remove(findIndexById(id));
     }
 

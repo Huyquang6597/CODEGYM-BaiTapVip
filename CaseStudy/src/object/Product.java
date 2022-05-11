@@ -20,6 +20,7 @@ public class Product {
         this.description = description;
     }
 
+
     public int getProductid() {
         return productid;
     }

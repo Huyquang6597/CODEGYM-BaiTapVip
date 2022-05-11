@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileUserCSV {
-
+String filePath  = "/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/CaseStudy/src/file/User.csv";
 
     public List<User> readFileUser(List<User> userList, String filePath) throws FileNotFoundException {
         try {
@@ -30,7 +30,7 @@ public class FileUserCSV {
         return userList;
     }
 
-    public void writeFileUser (List<User> userList, String filePath) throws IOException {
+    public void writeFileUser(List<User> userList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         String line = "USERNAME , PASSWORD \n";

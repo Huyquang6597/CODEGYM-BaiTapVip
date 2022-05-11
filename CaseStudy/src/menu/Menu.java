@@ -1,15 +1,20 @@
 package menu;
 
+import account.User;
+import file.FileUserCSV;
 import manage.ManageProduct;
 import object.Product;
 import manage.ManageUser;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     ManageProduct manageProduct = new ManageProduct();
     ManageUser manageUser = new ManageUser();
+    FileUserCSV fileUserCSV = new FileUserCSV();
+
     String str;
     int choice;
     Scanner scanner = new Scanner(System.in);
@@ -17,11 +22,12 @@ public class Menu {
     public Menu() {
     }
 
-    public void menuMain() {
+    public void menuMain() throws IOException {
         str = """
                 ==================Menu==================|
                 ----------------------------------------|
-                1. Log In                               |
+                1. Registration                         |
+                2. Log In                               |
                 0. Exit                                 |
                                                         |
                 ========================================|
@@ -30,23 +36,39 @@ public class Menu {
         choice = scanner.nextInt();
         switch (choice) {
             case 1:
+                System.out.println("Registration");
+                System.out.println("Enter UserName: ");
+                scanner.nextLine();
+                String usn = scanner.nextLine();
+                System.out.println("Enter PassWord: ");
+                String pass = scanner.nextLine();
+                User user = new User(usn, pass);
+                manageUser.add(user);
+                fileUserCSV.writeFileUser(manageUser.getUserList());
+                System.out.println("Sign Up Success !");
+                menuMain();
+
+                break;
+            case 2:
                 System.out.println("Log In ");
                 System.out.println("Enter UserName: ");
                 scanner.nextLine();
                 String username = scanner.nextLine();
                 System.out.println("Enter PassWord: ");
                 String password = scanner.nextLine();
-                if (username.equals("admin") && password.equals("123"))
-                {
-                    manageUser.login(username, password);
-                    System.out.println("Logged in successfully");
+                if (manageUser.login(username, password) == 1) {
                     menuProduct();
+                } else if(manageUser.login(username,password) != -1) {
+                    System.out.println("You do not have an account, please register first !");
+                    menuMain();
+
                 } else {
-                    System.out.println("Wrong account or password, please re-enter");
+                    System.out.println("Wrong username or password, please re-enter");
+                    menuMain();
                 }
                 break;
 
-            case 2:
+            case 3:
                 System.exit(0);
 
         }
@@ -67,7 +89,7 @@ public class Menu {
                 """;
         System.out.println(str);
         choice = scanner.nextInt();
-        switch (choice){
+        switch (choice) {
             case 1:
                 manageUser.display();
                 break;
@@ -83,7 +105,9 @@ public class Menu {
         }
     }
 
-    public void menuProduct() {
+    //order để lưu vào file
+//display bill đọc file
+    public void menuProduct() throws IOException {
         str = """
                 ==================Menu==================|
                 ----------------------------------------|
@@ -92,7 +116,8 @@ public class Menu {
                 3. Edit products                        |
                 4. Delete products                      |
                 5. Search products                      |
-                6. Hien thi danh sach don hang          |
+                6. Order                                | 
+                7. Display the bill                     |
                                                         |
                 0. Exit                                 |
                                                         |
@@ -120,6 +145,8 @@ public class Menu {
                 break;
             case 6:
                 break;
+            case 7:
+                break;
             default:
                 menuMain();
 
@@ -127,12 +154,13 @@ public class Menu {
 
     }
 
-    public void menuShow() {
+    public void menuShow() throws IOException {
         manageProduct.display();
         menuProduct();
+
     }
 
-    public void menuAdd() {
+    public void menuAdd() throws IOException {
         System.out.println("Enter product Id: ");
         int productId1 = scanner.nextInt();
         scanner.nextLine();
@@ -156,7 +184,7 @@ public class Menu {
         menuProduct();
     }
 
-    public void menuEdit() {
+    public void menuEdit() throws IOException {
         System.out.println("Enter product id to edit: ");
         int editId = scanner.nextInt();
         int a = manageProduct.findIndexById(editId);
@@ -191,7 +219,7 @@ public class Menu {
         manageProduct.delete(productId);
     }
 
-    public void menuFindById() {
+    public void menuFindById() throws IOException {
         System.out.println("Enter product id to search: ");
         scanner.nextLine();
         int productId = scanner.nextInt();
@@ -205,5 +233,8 @@ public class Menu {
 
     }
 
+    public void menuOrder() {
+
+    }
 
 }

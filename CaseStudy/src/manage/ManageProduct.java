@@ -11,6 +11,7 @@ public class ManageProduct {
     public ManageProduct() {
     }
 
+
     public List<Product> getProductList() {
         return productList;
     }
@@ -43,18 +44,18 @@ public class ManageProduct {
         if (findIndexById(id) != -1){
             productList.remove(findIndexById(id));
         } else {
-            System.out.println("Khong tim thay ma san pham");
+            System.out.println("No product id found !");
         }
     }
 
     public void edit(int id,Product product ){
         int idexOfId = findIndexById(id);
         if (idexOfId == -1){
-            System.out.println("Khong tim thay ma san pham");
+            System.out.println("No product id found !");
         } else {
             productList.set(idexOfId,product);
         }
-        System.out.println("Da sua thanh cong!");
+        System.out.println("Successfully changed !");
     }
 
 

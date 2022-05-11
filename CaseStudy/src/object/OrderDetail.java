@@ -1,60 +1,58 @@
 package object;
 
 public class OrderDetail {
-    private int id;
-    private int orderId;
-    private int productId;
-    private int productPrice;
-    private int quantity;
+    Product product = new Product();
+
+    private String customerName;
+    private String phoneNumber;
+    private String email;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int id, int orderId, int productId, int productPrice, int quantity) {
-        this.id = id;
-        this.orderId = orderId;
-        this.productId = productId;
-        this.productPrice = productPrice;
-        this.quantity = quantity;
+    public String p() {
+        return product.getProductid() + " " + product.getProductName() + " " + product.getQuantity();
     }
 
-    public int getId() {
-        return id;
+    public OrderDetail(String customerName, String phoneNumber, String email) {
+
+        this.customerName = customerName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public int getProductId() {
-        return productId;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public String getEmail() {
+        return email;
     }
 
-    public int getProductPrice() {
-        return productPrice;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setProductPrice(int productPrice) {
-        this.productPrice = productPrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    @Override
+    public String toString() {
+        return "OrderDetail{" + p() +
+                " Customer Name: '" + customerName + '\'' +
+                ", Phone Number: '" + phoneNumber + '\'' +
+                ", Email: '" + email + '\'' +
+                '}';
     }
 }
+
