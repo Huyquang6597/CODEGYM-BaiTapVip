@@ -7,6 +7,7 @@ import object.Product;
 import manage.ManageUser;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -19,7 +20,7 @@ public class Menu {
     int choice;
     Scanner scanner = new Scanner(System.in);
 
-    public Menu() {
+    public Menu() throws FileNotFoundException {
     }
 
     public void menuMain() throws IOException {
@@ -57,7 +58,7 @@ public class Menu {
                 System.out.println("Enter PassWord: ");
                 String password = scanner.nextLine();
                 if (manageUser.login(username, password) == 1) {
-                    menuProduct();
+                    menuAccount();
                 } else if(manageUser.login(username,password) != -1) {
                     System.out.println("You do not have an account, please register first !");
                     menuMain();
@@ -75,12 +76,13 @@ public class Menu {
 
     }
 
-    public void menuAccount() {
+    public void menuAccount() throws IOException {
         str = """
                 ==================Menu==================|
                 ----------------------------------------|
                 1. Display Information                  |
-                2. Change Password                      |   
+                2. Change Password                      |
+                3. Access the system                    |   
                 0. Log Out                              |
                                                         |
                 Please enter options                    |
@@ -92,16 +94,20 @@ public class Menu {
         switch (choice) {
             case 1:
                 manageUser.display();
+                menuAccount();
                 break;
             case 2:
                 System.out.println("Enter new passwpord: ");
                 scanner.nextLine();
                 String newPass = scanner.nextLine();
                 manageUser.currentUser.setPassWord(newPass);
-
+                System.out.println("Change password successfully");
+                menuAccount();
                 break;
             case 3:
+                menuProduct();
                 break;
+            default:menuMain();
         }
     }
 

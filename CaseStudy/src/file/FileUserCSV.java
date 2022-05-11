@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class FileUserCSV {
 String filePath  = "/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/CaseStudy/src/file/User.csv";
 
-    public List<User> readFileUser(List<User> userList, String filePath) throws FileNotFoundException {
+    public List<User> readFileUser(List<User> userList) throws FileNotFoundException {
         try {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
@@ -41,4 +41,6 @@ String filePath  = "/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/CaseStudy/src/
         bufferedWriter.close();
         fileWriter.close();
     }
+
+
 }

@@ -1,7 +1,9 @@
 package manage;
 
 import account.User;
+import file.FileUserCSV;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,16 @@ public class ManageUser {
                     "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
                     "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
 
-    List<User> userList = new ArrayList<>();
+
+    FileUserCSV fileUserCSV = new FileUserCSV();
+    private List<User> userList = new ArrayList<>();
+//    private List<ManageUser> manageUserList = new ArrayList<>();
     public static User currentUser = null;
     int count = 0;
 
-
+public ManageUser() throws FileNotFoundException {
+    userList = fileUserCSV.readFileUser(userList);
+}
     public List<User> getUserList() {
         return userList;
     }
@@ -31,7 +38,6 @@ public class ManageUser {
     }
 
     public void display() {
-        boolean check = false;
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));
 //            check = true;
