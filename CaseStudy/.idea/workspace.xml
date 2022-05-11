@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0abdb665-91db-438d-a595-500db343ec8e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/file/User.csv" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/file/User.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/account/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/account/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/file/FileProductCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/file/FileProductCSV.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/file/User.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/file/User.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/manage/ManageUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manage/ManageUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/object/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/object/Product.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +166,8 @@
       <workItem from="1651811423255" duration="58496000" />
       <workItem from="1652233167896" duration="2937000" />
       <workItem from="1652237318470" duration="105000" />
-      <workItem from="1652239171877" duration="4102000" />
+      <workItem from="1652239171877" duration="5004000" />
+      <workItem from="1652245172805" duration="3874000" />
     </task>
     <servers />
   </component>
@@ -188,20 +184,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/manage/ManageUser.java</url>
-          <line>83</line>
-          <properties class="manage.ManageUser" method="findByUserName">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

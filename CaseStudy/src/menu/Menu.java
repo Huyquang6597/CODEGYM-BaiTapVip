@@ -9,6 +9,7 @@ import manage.ManageUser;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -34,12 +35,26 @@ public class Menu {
                 ========================================|
                 """;
         System.out.println(str);
-        choice = scanner.nextInt();
+        try {
+            choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice < 0 || choice > 2) {
+                System.out.println("This function is not available, please re-enter the selection !");
+                menuMain();
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter only numbers 0 to 2 to access the function !");
+            scanner.nextLine();
+            choice = -1;
+            menuMain();
+        }
+//    while (choice < 0 || choice > 2 );
+
         switch (choice) {
             case 1:
                 System.out.println("Registration");
                 System.out.println("Enter UserName: ");
-                scanner.nextLine();
+
                 String usn = scanner.nextLine();
                 System.out.println("Enter PassWord: ");
                 String pass = scanner.nextLine();
@@ -53,13 +68,13 @@ public class Menu {
             case 2:
                 System.out.println("Log In ");
                 System.out.println("Enter UserName: ");
-                scanner.nextLine();
+
                 String username = scanner.nextLine();
                 System.out.println("Enter PassWord: ");
                 String password = scanner.nextLine();
                 if (manageUser.login(username, password) == 1) {
                     menuAccount();
-                } else if(manageUser.login(username,password) != -1) {
+                } else if (manageUser.login(username, password) != -1) {
                     System.out.println("You do not have an account, please register first !");
                     menuMain();
 
@@ -90,7 +105,19 @@ public class Menu {
                 ========================================|
                 """;
         System.out.println(str);
-        choice = scanner.nextInt();
+        try {
+            choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice < 0 || choice > 3) {
+                System.out.println("This function is not available, please re-enter the selection !");
+                menuAccount();
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter only numbers 0 to 3 to access the function !");
+            scanner.nextLine();
+            choice = -1;
+            menuAccount();
+        }
         switch (choice) {
             case 1:
                 manageUser.display();
@@ -98,11 +125,11 @@ public class Menu {
                 break;
             case 2:
                 System.out.println("Enter User name: ");
-                scanner.nextLine();
+
                 String usn1 = scanner.nextLine();
 
                 int b = manageUser.findByName(usn1);
-                if(b != -1){
+                if (b != -1) {
                     System.out.println("Enter new Passwpord: ");
                     String newPass = scanner.nextLine();
                     manageUser.getUserList().get(b).setPassWord(newPass);
@@ -117,7 +144,8 @@ public class Menu {
             case 3:
                 menuProduct();
                 break;
-            default:menuMain();
+            default:
+                menuMain();
         }
     }
 
@@ -140,7 +168,19 @@ public class Menu {
                 ========================================|
                 """;
         System.out.println(str);
-        choice = scanner.nextInt();
+        try {
+            choice = scanner.nextInt();
+            scanner.nextLine();
+            if (choice < 0 || choice > 3) {
+                System.out.println("This function is not available, please re-enter the selection !");
+                menuAccount();
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter only numbers 0 to 3 to access the function !");
+            scanner.nextLine();
+            choice = -1;
+            menuAccount();
+        }
         switch (choice) {
             case 1:
                 menuShow();
@@ -177,6 +217,14 @@ public class Menu {
     public void menuAdd() throws IOException {
         System.out.println("Enter product Id: ");
         int productId1 = scanner.nextInt();
+//        try {
+//            int productId1 = scanner.nextInt();
+//
+//        }catch (InputMismatchException e){
+//            System.out.println("Nhap sai dinh dang");
+//            int productId1 = scanner.nextInt();
+//        }
+
         scanner.nextLine();
         System.out.println("Enter product name: ");
         String productName = scanner.nextLine();
