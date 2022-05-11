@@ -35,5 +35,8 @@ public class User {
                 "UserName: '" + userName + '\'' +
                 ", PassWord: '" + passWord + '\'' +
                 '}';
+//        System.out.printf("\"| %-10s| %-10s|\n\"", "USER NAME", "PASSWORD");
+//        System.out.println("----------------------------");
+//        return String.format("\"| %-10s| %-10s|\n\"", userName,passWord);
     }
 }

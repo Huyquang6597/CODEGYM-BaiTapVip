@@ -10,10 +10,10 @@ import java.util.List;
 public class ManageUser {
 
     public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
-    public static final String NOT_VALID_PASS_MESSAGE =
-            "Nhập Password chưa đúng định dạng!!!\n" +
-                    "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
-                    "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
+//    public static final String NOT_VALID_PASS_MESSAGE =
+//            "Nhập Password chưa đúng định dạng!!!\n" +
+//                    "Nhập lại Mật khẩu theo yêu cầu sau:\n" +
+//                    "[Tối thiểu 8 ký tự gồm chữ hoa, chữ thường, ký tự số và ký tự đặc biệt] >>> ";
 
 
     FileUserCSV fileUserCSV = new FileUserCSV();
@@ -69,11 +69,11 @@ public ManageUser() throws FileNotFoundException {
 
     public void editUserName(String username, String password, User user) {
         if (count == 0) {
-            System.out.println("Ban chua dang ky tai khoan , moi dang ky tai khoan");
+            System.out.println("You do not have an account, please register for an account first !");
         } else {
             int indexOfUserName = findByUserName(username, password);
             if (indexOfUserName == -1) {
-                System.out.println("Enter the wrong username or password, please re-enter !");
+                System.out.println("Enter the wrong username , please re-enter !");
             } else {
                 userList.set(findByUserName(username, password), user);
                 System.out.println("Change password successfull !");
@@ -90,6 +90,14 @@ public ManageUser() throws FileNotFoundException {
         return -1;
     }
 
+    public int findByName(String username) {
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserName().equals(username) ) {
+                return i;
+            }
+        }
+        return -1;
+    }
     public int findIndexById(int id) {
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));

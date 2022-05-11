@@ -97,12 +97,22 @@ public class Menu {
                 menuAccount();
                 break;
             case 2:
-                System.out.println("Enter new passwpord: ");
+                System.out.println("Enter User name: ");
                 scanner.nextLine();
-                String newPass = scanner.nextLine();
-                manageUser.currentUser.setPassWord(newPass);
-                System.out.println("Change password successfully");
-                menuAccount();
+                String usn1 = scanner.nextLine();
+
+                int b = manageUser.findByName(usn1);
+                if(b != -1){
+                    System.out.println("Enter new Passwpord: ");
+                    String newPass = scanner.nextLine();
+                    manageUser.getUserList().get(b).setPassWord(newPass);
+                    System.out.println("Change password successfully");
+                    menuAccount();
+                } else {
+                    System.out.println("No User Name found !");
+                    menuAccount();
+                }
+
                 break;
             case 3:
                 menuProduct();
@@ -121,13 +131,11 @@ public class Menu {
                 2. Add new products                     |
                 3. Edit products                        |
                 4. Delete products                      |
-                5. Search products                      |
-                6. Order                                | 
-                7. Display the bill                     |
+                5. Search products                      |                 
                                                         |
                 0. Exit                                 |
                                                         |
-                Enter selection from 1 to 6, 0 to exit  |
+                Please enter options                    |
                                                         |
                 ========================================|
                 """;
@@ -174,11 +182,9 @@ public class Menu {
         String productName = scanner.nextLine();
 
         System.out.println("Enter product manufacture date: ");
-        int manufactureDate = scanner.nextInt();
-        scanner.nextLine();
+        String manufactureDate = scanner.nextLine();
         System.out.println("Enter the expiration date: ");
-        int expireDate = scanner.nextInt();
-        scanner.nextLine();
+        String expireDate = scanner.nextLine();
         System.out.println("Enter product quantity: ");
         int quantity = scanner.nextInt();
         scanner.nextLine();
@@ -201,9 +207,9 @@ public class Menu {
             System.out.println("Enter product name: ");
             String productName = scanner.nextLine();
             System.out.println("Enter product manufacture date: ");
-            int manufactureDate = scanner.nextInt();
+            String manufactureDate = scanner.nextLine();
             System.out.println("Enter the expiration date: ");
-            int expireDate = scanner.nextInt();
+            String expireDate = scanner.nextLine();
             System.out.println("Enter product quantity: ");
             int quantity = scanner.nextInt();
             scanner.nextLine();

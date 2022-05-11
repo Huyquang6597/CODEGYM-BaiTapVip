@@ -3,15 +3,15 @@ package object;
 public class Product {
     private  int productid;
     private String productName;
-    private int manufactureDate; //ngày sx
-    private int expireDate;
+    private String manufactureDate; //ngày sx
+    private String expireDate;
     private int quantity;
     private String description;
 
     public Product() {
     }
 
-    public Product(int productid, String productName,  int manufactureDate, int expireDate, int quantity, String description) {
+    public Product(int productid, String productName,  String manufactureDate, String expireDate, int quantity, String description) {
         this.productid = productid;
         this.productName = productName;
         this.manufactureDate = manufactureDate;
@@ -38,19 +38,19 @@ public class Product {
     }
 
 
-    public int getManufactureDate() {
+    public String getManufactureDate() {
         return manufactureDate;
     }
 
-    public void setManufactureDate(int manufactureDate) {
+    public void setManufactureDate(String manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 
-    public int getExpireDate() {
+    public String getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(int expireDate) {
+    public void setExpireDate(String expireDate) {
         this.expireDate = expireDate;
     }
 
