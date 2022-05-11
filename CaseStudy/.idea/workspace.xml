@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0abdb665-91db-438d-a595-500db343ec8e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file/FileProductCSV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/file/FileProductCSV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file/Product.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/file/Product.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/file/User.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/file/User.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manage/ManageOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manage/ManageOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/manage/ManageProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/manage/ManageProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/menu/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/menu/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,6 +35,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="28mAW2jwkWuZHHRBK0z5D2qD39Q" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -167,7 +174,7 @@
       <workItem from="1652233167896" duration="2937000" />
       <workItem from="1652237318470" duration="105000" />
       <workItem from="1652239171877" duration="5004000" />
-      <workItem from="1652245172805" duration="3874000" />
+      <workItem from="1652245172805" duration="12819000" />
     </task>
     <servers />
   </component>

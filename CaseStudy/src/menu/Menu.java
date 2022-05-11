@@ -1,6 +1,7 @@
 package menu;
 
 import account.User;
+import file.FileProductCSV;
 import file.FileUserCSV;
 import manage.ManageProduct;
 import object.Product;
@@ -16,6 +17,7 @@ public class Menu {
     ManageProduct manageProduct = new ManageProduct();
     ManageUser manageUser = new ManageUser();
     FileUserCSV fileUserCSV = new FileUserCSV();
+    FileProductCSV fileProductCSV = new FileProductCSV();
 
     String str;
     int choice;
@@ -97,7 +99,7 @@ public class Menu {
                 ----------------------------------------|
                 1. Display Information                  |
                 2. Change Password                      |
-                3. Access the system                    |   
+                3. Access to main system                |   
                 0. Log Out                              |
                                                         |
                 Please enter options                    |
@@ -171,7 +173,7 @@ public class Menu {
         try {
             choice = scanner.nextInt();
             scanner.nextLine();
-            if (choice < 0 || choice > 3) {
+            if (choice < 0 || choice > 5) {
                 System.out.println("This function is not available, please re-enter the selection !");
                 menuAccount();
             }
@@ -215,42 +217,10 @@ public class Menu {
     }
 
     public void menuAdd() throws IOException {
-        System.out.println("Enter product Id: ");
-        int productId1 = scanner.nextInt();
-//        try {
-//            int productId1 = scanner.nextInt();
-//
-//        }catch (InputMismatchException e){
-//            System.out.println("Nhap sai dinh dang");
-//            int productId1 = scanner.nextInt();
-//        }
 
-        scanner.nextLine();
-        System.out.println("Enter product name: ");
-        String productName = scanner.nextLine();
-
-        System.out.println("Enter product manufacture date: ");
-        String manufactureDate = scanner.nextLine();
-        System.out.println("Enter the expiration date: ");
-        String expireDate = scanner.nextLine();
-        System.out.println("Enter product quantity: ");
-        int quantity = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Enter product description: ");
-        String description = scanner.nextLine();
-
-        manageProduct.add(new Product(productId1, productName, manufactureDate, expireDate, quantity, description));
-        System.out.println("Successfully added !");
-        menuProduct();
-    }
-
-    public void menuEdit() throws IOException {
-        System.out.println("Enter product id to edit: ");
-        int editId = scanner.nextInt();
-        int a = manageProduct.findIndexById(editId);
-        if (a != -1) {
+        try {
             System.out.println("Enter product Id: ");
-            int productId2 = scanner.nextInt();
+            int productId1 = scanner.nextInt();
             scanner.nextLine();
             System.out.println("Enter product name: ");
             String productName = scanner.nextLine();
@@ -263,38 +233,97 @@ public class Menu {
             scanner.nextLine();
             System.out.println("Enter product description: ");
             String description = scanner.nextLine();
-            manageProduct.edit(editId, new Product(productId2, productName, manufactureDate, expireDate, quantity, description));
+            Product product = new Product(productId1, productName, manufactureDate, expireDate, quantity, description);
+            manageProduct.add(product);
+            fileProductCSV.writeFileProduct(manageProduct.getProductList());
+            System.out.println("Successfully added !");
             menuProduct();
-        } else {
-            System.out.println("No product id found !");
+        } catch (Exception e) {
+            System.out.println("Enter wrong format, please enter the correct number format !");
+            scanner.nextLine();
+            menuAdd();
+
         }
-        menuProduct();
+
     }
 
-    public void menuDelete() {
-        System.out.println("Enter product id to delete: ");
-        scanner.nextLine();
-        int productId = scanner.nextInt();
-        System.out.println("Delete product successfully !");
-        manageProduct.delete(productId);
+    public void menuEdit() throws IOException {
+        boolean flag = true;
+        while (flag) {
+            try {
+                System.out.println("Enter product id to edit: ");
+                int editId = scanner.nextInt();
+                int a = manageProduct.findIndexById(editId);
+                if (a != -1) {
+                    System.out.println("Enter product Id: ");
+                    int productId2 = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Enter product name: ");
+                    String productName = scanner.nextLine();
+                    System.out.println("Enter product manufacture date: ");
+                    String manufactureDate = scanner.nextLine();
+                    System.out.println("Enter the expiration date: ");
+                    String expireDate = scanner.nextLine();
+                    System.out.println("Enter product quantity: ");
+                    int quantity = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Enter product description: ");
+                    String description = scanner.nextLine();
+//                    manageProduct.edit(editId, new Product(productId2, productName, manufactureDate, expireDate, quantity, description));
+                    Product product = new Product(productId2, productName, manufactureDate, expireDate, quantity, description);
+                    manageProduct.edit(editId, product);
+                    fileProductCSV.writeFileProduct(manageProduct.getProductList());
+                    menuProduct();
+                } else {
+                    System.out.println("No product id found !");
+                }
+                menuProduct();
+                flag = false;
+            } catch (InputMismatchException e) {
+                System.out.println("Enter wrong format, please enter the correct number format !");
+                scanner.nextLine();
+            }
+
+        }
+    }
+
+    public void menuDelete() throws IOException {
+        try {
+            System.out.println("Enter product id to delete: ");
+            int productId = scanner.nextInt();
+            manageProduct.delete(productId);
+            fileProductCSV.writeFileProduct(manageProduct.getProductList());
+            scanner.nextLine();
+            menuProduct();
+        } catch (Exception e) {
+            System.out.println("Enter wrong format, please enter the correct number format !");
+            scanner.nextLine();
+            menuDelete();
+        }
+
+
     }
 
     public void menuFindById() throws IOException {
-        System.out.println("Enter product id to search: ");
-        scanner.nextLine();
-        int productId = scanner.nextInt();
-        int a = manageProduct.findIndexById(productId);
-        if (a != -1) {
-            System.out.println(manageProduct.getProductList().get(a));
-        } else {
-            System.out.println("No product id found !");
+        try {
+            System.out.println("Enter product id to search: ");
+            int productId = scanner.nextInt();
+            int a = manageProduct.findIndexById(productId);
+            if (a != -1) {
+                System.out.println(manageProduct.getProductList().get(a));
+                fileProductCSV.writeFileProduct(manageProduct.getProductList());
+            } else {
+                System.out.println("No product id found !");
+            }
+            menuProduct();
+        }catch (Exception e){
+            System.out.println("Enter wrong format, please enter the correct number format !");
+            scanner.nextLine();
+            menuFindById();
         }
-        menuProduct();
+
 
     }
 
-    public void menuOrder() {
-
-    }
 
 }

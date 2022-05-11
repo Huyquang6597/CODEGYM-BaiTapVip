@@ -3,6 +3,7 @@ package manage;
 import object.OrderDetail;
 import object.Product;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class ManageOrder {
     private List<OrderDetail> orderList = new ArrayList<>();
   ManageProduct manageProduct = new ManageProduct();
 
-    public ManageOrder() {
+    public ManageOrder() throws FileNotFoundException {
     }
 
     public List<OrderDetail> getOrderList() {

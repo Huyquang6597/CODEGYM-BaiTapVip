@@ -1,14 +1,18 @@
 package manage;
 
+import file.FileProductCSV;
 import object.Product;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ManageProduct {
+    FileProductCSV fileProductCSV = new FileProductCSV();
     private List<Product> productList = new ArrayList<>();
 
-    public ManageProduct() {
+    public ManageProduct() throws FileNotFoundException {
+        productList = fileProductCSV.readFileProduct(productList);
     }
 
 
@@ -43,12 +47,13 @@ public class ManageProduct {
     public void delete(int id){
         if (findIndexById(id) != -1){
             productList.remove(findIndexById(id));
+            System.out.println("Delete product successfully !");
         } else {
             System.out.println("No product id found !");
         }
     }
 
-    public void edit(int id,Product product ){
+    public void edit(int id , Product product){
         int idexOfId = findIndexById(id);
         if (idexOfId == -1){
             System.out.println("No product id found !");

@@ -1,6 +1,5 @@
 package file;
 
-import account.User;
 import object.Product;
 
 import java.io.*;
@@ -9,7 +8,7 @@ import java.util.Scanner;
 
 public class FileProductCSV {
     String filePath = "/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/CaseStudy/src/file/Product.csv";
-    public List<Product> readFileProduct(List<Product> productList, String filePath) throws FileNotFoundException {
+    public List<Product> readFileProduct(List<Product> productList) throws FileNotFoundException {
         try {
             FileReader fileReader = new FileReader(filePath);
             Scanner scanner = new Scanner(fileReader);
@@ -30,7 +29,7 @@ public class FileProductCSV {
         return productList;
     }
 
-    public void writeFileProduct(List<Product> productList, String filePath) throws IOException {
+    public void writeFileProduct(List<Product> productList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         String line = "PRODUCT ID , PRODUCT NAME , PRODUCT MANUFACTURE DATE , PRODUCT EXPIRED DATE , PRODUCT QUANTITY , PRODUCT DESCRIPTION  \n";
