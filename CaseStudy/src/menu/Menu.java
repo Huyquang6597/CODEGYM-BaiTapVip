@@ -74,15 +74,11 @@ public class Menu {
                 String username = scanner.nextLine();
                 System.out.println("Enter PassWord: ");
                 String password = scanner.nextLine();
-                if (manageUser.login(username, password) == 1) {
-                    menuAccount();
-                } else if (manageUser.login(username, password) != -1) {
-                    System.out.println("You do not have an account, please register first !");
+                 if (manageUser.login(username, password) != 1) {
+                    System.out.println("Wrong information entered, please re-enter !");
                     menuMain();
-
                 } else {
-                    System.out.println("Wrong username or password, please re-enter");
-                    menuMain();
+                    menuAccount();
                 }
                 break;
 
@@ -122,6 +118,7 @@ public class Menu {
         }
         switch (choice) {
             case 1:
+
                 manageUser.display();
                 menuAccount();
                 break;

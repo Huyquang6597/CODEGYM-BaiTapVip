@@ -32,7 +32,7 @@ public class FileProductCSV {
     public void writeFileProduct(List<Product> productList) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        String line = "PRODUCT ID , PRODUCT NAME , PRODUCT MANUFACTURE DATE , PRODUCT EXPIRED DATE , PRODUCT QUANTITY , PRODUCT DESCRIPTION  \n";
+        String line = "PRODUCTID , PRODUCTNAME , PRODUCTMANUFACTUREDATE , PRODUCTEXPIREDDATE , PRODUCTQUANTITY , PRODUCTDESCRIPTION  \n";
         for (Product p : productList) {
             line += p.getProductid() + ","
                     + p.getProductName() + ","
