@@ -71,24 +71,6 @@ public class Menu {
                 System.out.println("Sign Up Success !");
                 menuMain();
 
-
-//                for (User user : manageUser.getUserList()) {
-//                    if (user.getUserName().equals(usn)) {
-//                        System.out.println("ERROR");
-//                        menuMain();
-//                    } else {
-////                        System.out.println("Registration");
-////                        System.out.println("Enter UserName: ");
-////                        String usn = scanner.nextLine();
-//                        System.out.println("Enter PassWord: ");
-//                        String pass = scanner.nextLine();
-//                        manageUser.add(new User(usn, pass));
-//                        fileUserCSV.writeFileUser(manageUser.getUserList());
-//                        System.out.println("Sign Up Success !");
-//                        menuMain();
-//                    }
-
-
                 break;
             case 2:
                 System.out.println("Log In ");
@@ -105,7 +87,7 @@ public class Menu {
                 }
                 break;
 
-            case 3:
+            default:
                 System.exit(0);
 
         }
