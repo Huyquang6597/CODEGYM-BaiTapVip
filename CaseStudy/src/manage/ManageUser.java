@@ -18,13 +18,14 @@ public class ManageUser {
 
     FileUserCSV fileUserCSV = new FileUserCSV();
     private List<User> userList = new ArrayList<>();
-//    private List<ManageUser> manageUserList = new ArrayList<>();
+    //    private List<ManageUser> manageUserList = new ArrayList<>();
     public static User currentUser = null;
     int count = 0;
 
-public ManageUser() throws FileNotFoundException {
-    userList = fileUserCSV.readFileUser(userList);
-}
+    public ManageUser() throws FileNotFoundException {
+        userList = fileUserCSV.readFileUser(userList);
+    }
+
     public List<User> getUserList() {
         return userList;
     }
@@ -40,25 +41,21 @@ public ManageUser() throws FileNotFoundException {
     public void display() {
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));
-//            check = true;
         }
-//        if (check == false) {
-//            System.out.println("Chua co tai khoan!");
-//        }
     }
 
     public int login(String username, String password) {
 
 
-            for (int i = 0; i < userList.size(); i++) {
-                if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassWord().equals(password)) {
-                    System.out.println("Logged in successfully");
-
-                }
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUserName().equals(username) && userList.get(i).getPassWord().equals(password)) {
+                System.out.println("Logged in successfully");
+                break;
+            }
 //                if (userList.get(i).getUserName().equals(username) || userList.get(i).getPassWord().equals(password)) {
 //                    System.out.println("Enter wrong username or password, please re-enter !");
 //                }
-            }
+        }
         for (User user : userList) {
             if (user.getUserName().equals(username) && user.getPassWord().equals(password)) {
                 currentUser = user;
@@ -93,12 +90,13 @@ public ManageUser() throws FileNotFoundException {
 
     public int findByName(String username) {
         for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getUserName().equals(username) ) {
+            if (userList.get(i).getUserName().equals(username)) {
                 return i;
             }
         }
         return -1;
     }
+
     public int findIndexById(int id) {
         for (int i = 0; i < userList.size(); i++) {
             System.out.println(userList.get(i));
@@ -107,12 +105,12 @@ public ManageUser() throws FileNotFoundException {
         return -1;
     }
 
-    public void edit(int id, User user) {
-        userList.set(findIndexById(id), user);
-    }
-
-    public void delete(int id) {
-        userList.remove(findIndexById(id));
-    }
+//    public void edit(int id, User user) {
+//        userList.set(findIndexById(id), user);
+//    }
+//
+//    public void delete(int id) {
+//        userList.remove(findIndexById(id));
+//    }
 
 }

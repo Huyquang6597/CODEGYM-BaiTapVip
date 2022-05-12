@@ -39,7 +39,7 @@ public class Menu {
         System.out.println(str);
         try {
             choice = scanner.nextInt();
-            scanner.nextLine();
+
             if (choice < 0 || choice > 2) {
                 System.out.println("This function is not available, please re-enter the selection !");
                 menuMain();
@@ -50,31 +50,54 @@ public class Menu {
             choice = -1;
             menuMain();
         }
-//    while (choice < 0 || choice > 2 );
-
         switch (choice) {
             case 1:
                 System.out.println("Registration");
                 System.out.println("Enter UserName: ");
-
+                scanner.nextLine();
                 String usn = scanner.nextLine();
+                for (User user :
+                        manageUser.getUserList()) {
+                    if (user.getUserName().equals(usn)) {
+                        System.out.println("Already have this username, please enter another username ");
+                        menuMain();
+                    }
+                }
+
                 System.out.println("Enter PassWord: ");
                 String pass = scanner.nextLine();
-                User user = new User(usn, pass);
-                manageUser.add(user);
+                manageUser.add(new User(usn, pass));
                 fileUserCSV.writeFileUser(manageUser.getUserList());
                 System.out.println("Sign Up Success !");
                 menuMain();
+
+
+//                for (User user : manageUser.getUserList()) {
+//                    if (user.getUserName().equals(usn)) {
+//                        System.out.println("ERROR");
+//                        menuMain();
+//                    } else {
+////                        System.out.println("Registration");
+////                        System.out.println("Enter UserName: ");
+////                        String usn = scanner.nextLine();
+//                        System.out.println("Enter PassWord: ");
+//                        String pass = scanner.nextLine();
+//                        manageUser.add(new User(usn, pass));
+//                        fileUserCSV.writeFileUser(manageUser.getUserList());
+//                        System.out.println("Sign Up Success !");
+//                        menuMain();
+//                    }
+
 
                 break;
             case 2:
                 System.out.println("Log In ");
                 System.out.println("Enter UserName: ");
-
+                scanner.nextLine();
                 String username = scanner.nextLine();
                 System.out.println("Enter PassWord: ");
                 String password = scanner.nextLine();
-                 if (manageUser.login(username, password) != 1) {
+                if (manageUser.login(username, password) != 1) {
                     System.out.println("Wrong information entered, please re-enter !");
                     menuMain();
                 } else {
@@ -133,6 +156,7 @@ public class Menu {
                     String newPass = scanner.nextLine();
                     manageUser.getUserList().get(b).setPassWord(newPass);
                     System.out.println("Change password successfully");
+                    fileUserCSV.writeFileUser(manageUser.getUserList());
                     menuAccount();
                 } else {
                     System.out.println("No User Name found !");
@@ -313,7 +337,7 @@ public class Menu {
                 System.out.println("No product id found !");
             }
             menuProduct();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Enter wrong format, please enter the correct number format !");
             scanner.nextLine();
             menuFindById();
