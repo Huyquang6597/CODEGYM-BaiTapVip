@@ -1,6 +1,7 @@
 package menu;
 
 import file.WriteAndReadFile;
+import input.CheckRegex;
 import manage.ManageUser;
 import model.User;
 
@@ -11,6 +12,7 @@ import java.util.Scanner;
 public class Menu {
     ManageUser manageUser = new ManageUser();
     WriteAndReadFile writeAndReadFile = new WriteAndReadFile();
+    CheckRegex checkRegex = new CheckRegex();
 
 
     String str;
@@ -85,34 +87,34 @@ public class Menu {
 
     public void menuAdd() throws IOException {
 
-            try {
-                System.out.println("Enter Phone number to add :");
-                int phoneNumber = scanner.nextInt();
-               scanner.nextLine();
-                    System.out.println("Enter name :");
-                    String name = scanner.nextLine();
-                    System.out.println("Enter group: ");
-                    String group = scanner.nextLine();
-                    System.out.println("Enter gender :");
-                    String gender = scanner.nextLine();
-                    System.out.println("Enter address :");
-                    String address = scanner.nextLine();
-                    System.out.println("Enter Date of birth :");
-                    int dateOfBirth = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Enter email :");
-                    String email = scanner.nextLine();
-                    User user = new User(name, phoneNumber, group, gender, address, dateOfBirth, email);
-                    manageUser.add(user);
-                    System.out.println("Successfully added !");
-                    menuMain();
+        try {
+            System.out.println("Enter Phone number to add :");
+            int phoneNumber = Integer.parseInt(checkRegex.checkPhoneNumber());
+//            scanner.nextLine();
+            System.out.println("Enter name :");
+            String name = scanner.nextLine();
+            System.out.println("Enter group: ");
+            String group = scanner.nextLine();
+            System.out.println("Enter gender :");
+            String gender = scanner.nextLine();
+            System.out.println("Enter address :");
+            String address = scanner.nextLine();
+            System.out.println("Enter Date of birth :");
+            int dateOfBirth = scanner.nextInt();
+//            scanner.nextLine();
+            System.out.println("Enter email :");
+            String email = checkRegex.checkEmail();
+            User user = new User(name, phoneNumber, group, gender, address, dateOfBirth, email);
+            manageUser.add(user);
+            System.out.println("Successfully added !");
+            menuMain();
 
-            } catch (Exception e) {
-                System.out.println("Enter wrong format, please enter the correct number format !");
-                scanner.nextLine();
-                menuAdd();
-            }
+        } catch (Exception e) {
+            System.out.println("Enter wrong format, please enter the correct number format !");
+            scanner.nextLine();
+            menuAdd();
         }
+    }
 
 
     public void menuDelete() {
@@ -170,7 +172,7 @@ public class Menu {
                     int dateOfBirth = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Enter email :");
-                    String email = scanner.nextLine();
+                    String email = checkRegex.checkEmail();
                     User user = new User(name, editPhoneNumber, group, gender, address, dateOfBirth, email);
                     manageUser.edit(editPhoneNumber, user);
                     menuMain();
@@ -188,7 +190,7 @@ public class Menu {
 
     public void menuReadFromFile() throws IOException {
         writeAndReadFile.readFileUser("/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/FinalExam_MD2/src/file/User.csv", manageUser.getUserList());
-       menuMain();
+        menuMain();
 
     }
 

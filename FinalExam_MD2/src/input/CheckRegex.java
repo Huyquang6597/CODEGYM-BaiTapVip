@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class CheckRegex {
-    public String checkSoDT () {
+    public String checkPhoneNumber () {
         Scanner sc = new Scanner(System.in);
         String phoneNumber = "";
         while (true) {
@@ -27,7 +27,7 @@ public class CheckRegex {
         Scanner sc = new Scanner(System.in);
         String mail = "";
         while (true) {
-            System.out.println("Enter email :");
+//            System.out.println("Enter email :");
             System.out.println("(Note: Must start with a letter)");
             mail = sc.nextLine();
             Pattern p = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]+@[a-zA-Z]+(\\.[a-zA-Z]+)+$");
