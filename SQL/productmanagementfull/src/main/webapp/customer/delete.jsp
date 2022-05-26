@@ -11,6 +11,13 @@
     <title>Title</title>
 </head>
 <body>
+<form method="post">
+    <input type="number" name="id" value="${customerDelete.id}">
+    <input type="text" name="name" value="${customerDelete.name}">
+    <input type="number" name="age" value="${customerDelete.age}">
+    <button>Xóa</button>
 
+
+</form>
 </body>
 </html>

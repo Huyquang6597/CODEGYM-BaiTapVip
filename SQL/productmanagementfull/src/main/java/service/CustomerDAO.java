@@ -14,7 +14,7 @@ public class CustomerDAO implements ICustomerDAO {
     private static final String INSERT_USERS_SQL = "INSERT INTO users (name, email, country) VALUES (?, ?, ?);";
     private static final String SELECT_USER_BY_ID = "select id,name,age from customer where id =?";
     private static final String SELECT_ALL_USERS = "select * from users";
-    private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
+    private static final String DELETE_USERS_SQL = "delete from customer where id = ?;";
     private static final String UPDATE_USERS_SQL = "update customer set name = ?,age= ? where id = ?;";
 
     protected Connection getConnection() {
