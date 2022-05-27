@@ -13,7 +13,9 @@
 </head>
 <body>
 <h1>danh sách</h1>
-<a href="/customers?action=create">Tạo Mới</a>
+<a href="/customers?action=create" style="margin-right: 20px">Tạo Mới</a> <br>
+<a href="/customers?action=search">Tìm Kiếm</a>
+
 <c:forEach var="customer" items="${dsKH}">
     <h2>${customer.id},${customer.name}, ${customer.age}
         <a href="/customers?action=update&id=${customer.id}">Sửa</a>

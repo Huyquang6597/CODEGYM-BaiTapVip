@@ -11,6 +11,7 @@ public interface ICustomerDAO {
 //    void create(Customer customer) throws SQLException;
 
     public Customer findById(int id);
+    List<Customer> findByName(String name);
 
     int findIndexById(int id);
 

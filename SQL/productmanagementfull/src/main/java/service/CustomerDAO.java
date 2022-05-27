@@ -16,6 +16,7 @@ public class CustomerDAO implements ICustomerDAO {
     private static final String SELECT_ALL_USERS = "select * from users";
     private static final String DELETE_USERS_SQL = "delete from customer where id = ?;";
     private static final String UPDATE_USERS_SQL = "update customer set name = ?,age= ? where id = ?;";
+    private static final String FIND_USERS_BY_NAME_SQL = "select * from customer where name like?;";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -65,6 +66,26 @@ public class CustomerDAO implements ICustomerDAO {
 
         }
         return customer;
+    }
+
+    @Override
+    public List<Customer> findByName(String key) {
+        List<Customer> customerList = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_USERS_BY_NAME_SQL);
+            preparedStatement.setString(1, "%" + key + "%");
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                customerList.add(new Customer(id, name, age));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customerList;
     }
 
     @Override

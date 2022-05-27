@@ -34,12 +34,23 @@ public class CustomerServlet extends HttpServlet {
                 case "delete":
                     showDeleteForm(request, response);
                     break;
+                case "search":
+                    showSearchForm(request, response);
+                    break;
                 default:
                     showList(request, response);
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
+    }
+
+    private void showSearchForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/search.jsp");
+        String name = request.getParameter("name");
+        List<Customer> customers = customerDAO.findByName(name);
+        request.setAttribute("search",customers);
+        requestDispatcher.forward(request,response);
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -99,14 +110,20 @@ public class CustomerServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-//            case "delete":
-//                try {
-//                    deleteCustomer(request,response);
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//                break;
+            case "search":
+                searchCustomer(request,response);
+                break;
+
         }
+    }
+
+    private void searchCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/search.jsp");
+String key = request.getParameter("name");
+List<Customer> customers = customerDAO.findByName(key);
+request.setAttribute("search",customers);
+requestDispatcher.forward(request,response);
+
     }
 
 //    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
