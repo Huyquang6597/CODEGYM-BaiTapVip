@@ -12,6 +12,7 @@
     <title>Title</title>
 </head>
 <body>
+<a href="/customers"><button>Quay lại trang chủ</button></a>
 <form method="post">
     <input type="text" name="name">
     <button>Tìm</button>

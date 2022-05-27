@@ -49,8 +49,8 @@ public class CustomerServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/search.jsp");
         String name = request.getParameter("name");
         List<Customer> customers = customerDAO.findByName(name);
-        request.setAttribute("search",customers);
-        requestDispatcher.forward(request,response);
+        request.setAttribute("search", customers);
+        requestDispatcher.forward(request, response);
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -111,18 +111,18 @@ public class CustomerServlet extends HttpServlet {
                 }
                 break;
             case "search":
-                searchCustomer(request,response);
+                searchCustomer(request, response);
                 break;
 
         }
     }
 
     private void searchCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/search.jsp");
-String key = request.getParameter("name");
-List<Customer> customers = customerDAO.findByName(key);
-request.setAttribute("search",customers);
-requestDispatcher.forward(request,response);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/search.jsp");
+        String key = request.getParameter("name");
+        List<Customer> customers = customerDAO.findByName(key);
+        request.setAttribute("search", customers);
+        requestDispatcher.forward(request, response);
 
     }
 
