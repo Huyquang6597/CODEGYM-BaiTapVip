@@ -37,9 +37,9 @@ public class StudentServiceImpl implements StudentService {
                 String studentName = rs.getString("studentName");
                 int age = rs.getInt("age");
                 int classId = rs.getInt("classId");
-                Lop clazz =  classService.findById(classId);
+                Lop clazz = classService.findById(classId);
 
-                students.add(new Student(studentId, studentName,clazz,age));
+                students.add(new Student(studentId, studentName, clazz, age));
             }
         } catch (SQLException e) {
 
@@ -54,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
              PreparedStatement preparedStatement = connection.prepareStatement("insert into student(studentName,age,classId)values (?,?,?)");) {
             preparedStatement.setString(1, student.getName());
             preparedStatement.setInt(2, student.getAge());
-            preparedStatement.setInt(3,student.getClazz().getId());
+            preparedStatement.setInt(3, student.getClazz().getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -64,7 +64,25 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student findById(int id) {
-        return null;
+        Student student = new Student();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where studentId =  ?");) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int studentId = rs.getInt("studentId");
+                String studentName = rs.getString("studentName");
+                int age = rs.getInt("age");
+                int classId = rs.getInt("classId");
+                Lop clazz = classService.findById(classId);
+
+                student = (new Student(studentId, studentName, clazz, age));
+            }
+        } catch (SQLException e) {
+
+        }
+        return student;
     }
 
     @Override
@@ -74,6 +92,15 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean delete(int id) throws SQLException {
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("delete from student where studentId=?");) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+
+        }
         return false;
     }
 
