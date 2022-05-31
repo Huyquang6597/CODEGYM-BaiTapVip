@@ -24,11 +24,15 @@ public class HomeServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 
         String classId = request.getParameter("classId");
+        String findName = request.getParameter("findName");
         List<Lop> classes = classService.findAll();
         request.setAttribute("classes", classes);
         List<Student> students = studentService.findAll();
         if (classId != null) {
             students = studentService.findAllByClass(Integer.parseInt(classId));
+        }
+        if (findName != null) {
+            students = studentService.findAllByNameContains(findName);
         }
         request.setAttribute("students", students);
         request.getRequestDispatcher("index.jsp").forward(request, response);

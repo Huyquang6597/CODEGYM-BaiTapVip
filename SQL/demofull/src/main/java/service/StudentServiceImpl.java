@@ -119,7 +119,30 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = new ArrayList<>();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from student where classId = ?");) {
-            preparedStatement.setInt(1,classId);
+            preparedStatement.setInt(1, classId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int studentId = rs.getInt("studentId");
+                String studentName = rs.getString("studentName");
+                int age = rs.getInt("age");
+                int clazzId = rs.getInt("classId");
+                Lop clazz = classService.findById(clazzId);
+
+                students.add(new Student(studentId, studentName, clazz, age));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return students;
+    }
+
+    @Override
+    public List<Student> findAllByNameContains(String findName) {
+        List<Student> students = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where studentName like ?");) {
+            preparedStatement.setString(1, "%" + findName + "%");
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
