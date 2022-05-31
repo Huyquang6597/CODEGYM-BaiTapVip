@@ -22,11 +22,14 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-//        String act = request.getParameter("act");
 
+        String classId = request.getParameter("classId");
         List<Lop> classes = classService.findAll();
         request.setAttribute("classes", classes);
         List<Student> students = studentService.findAll();
+        if (classId != null) {
+            students = studentService.findAllByClass(Integer.parseInt(classId));
+        }
         request.setAttribute("students", students);
         request.getRequestDispatcher("index.jsp").forward(request, response);
 

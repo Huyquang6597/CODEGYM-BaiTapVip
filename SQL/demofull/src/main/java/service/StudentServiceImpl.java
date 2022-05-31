@@ -113,4 +113,27 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAllOrderByAge() {
         return null;
     }
+
+    @Override
+    public List<Student> findAllByClass(int classId) {
+        List<Student> students = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from student where classId = ?");) {
+            preparedStatement.setInt(1,classId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int studentId = rs.getInt("studentId");
+                String studentName = rs.getString("studentName");
+                int age = rs.getInt("age");
+                int clazzId = rs.getInt("classId");
+                Lop clazz = classService.findById(clazzId);
+
+                students.add(new Student(studentId, studentName, clazz, age));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return students;
+    }
 }
