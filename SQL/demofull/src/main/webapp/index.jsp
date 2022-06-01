@@ -69,6 +69,7 @@
             <table class="table table-striped mt-3">
                 <thead>
                 <tr>
+
                     <th scope="col">Name</th>
                     <th scope="col">Age</th>
                     <th scope="col">Class Name</th>
@@ -81,7 +82,12 @@
                         <td>${st.age}</td>
                         <td>${st.clazz.name}</td>
                         <td>
-                            <a class="btn btn-Primary" href="/students?act=view&id=${st.id}">View</a>
+                            <form action="/students" method="post" id="view${st.id}" style="display: inline">
+                                <input type="hidden" name="act" value="view">
+                                <input type="hidden"  name="id" value="${st.id}">
+                                <a class="btn btn-Primary" href="/students?act=view&id=${st.id}">View</a>
+                            </form>
+
                             <form action="/students" method="post" id="edit${st.id}" style="display: inline">
                                 <input type="hidden" name="act" value="edit">
                                 <input type="hidden"  name="id" value="${st.id}">
