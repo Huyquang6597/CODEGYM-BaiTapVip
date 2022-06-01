@@ -85,7 +85,7 @@
                             <form action="/students" method="post" id="view${st.id}" style="display: inline">
                                 <input type="hidden" name="act" value="view">
                                 <input type="hidden"  name="id" value="${st.id}">
-                                <a class="btn btn-Primary" href="/students?act=view&id=${st.id}">View</a>
+                                <a class="btn btn-primary" href="/students?act=view&id=${st.id}">View</a>
                             </form>
 
                             <form action="/students" method="post" id="edit${st.id}" style="display: inline">
