@@ -87,6 +87,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public boolean update(Student student) throws SQLException {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("update student set studentName = ?, age = ? where studentId = ?");) {
+            preparedStatement.setString(1, student.getName());
+            preparedStatement.setInt(2, student.getAge());
+            preparedStatement.setInt(3, student.getId());
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        }
         return false;
     }
 

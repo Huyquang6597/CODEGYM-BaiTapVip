@@ -34,12 +34,23 @@ public class StudentServlet extends HttpServlet {
             case "view":
                 showView(request,response);
                 break;
+            case "edit":
+                showEditForm(request,response);
+                break;
             default:
                 showList(request,response);
                 break;
         }
     }
 
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Lop> classes = classService.findAll();
+        request.setAttribute("classes",classes);
+        int id = Integer.parseInt((request.getParameter("id")));
+        Student student = studentService.findById(id);
+        request.setAttribute("student",student);
+        request.getRequestDispatcher("student/edit.jsp").forward(request,response);
+    }
 
 
     private void showView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -87,7 +98,11 @@ public class StudentServlet extends HttpServlet {
                 }
                 break;
             case "edit":
-                edit(request,response);
+                try {
+                    edit(request,response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "delete":
                 try {
@@ -108,7 +123,14 @@ public class StudentServlet extends HttpServlet {
         response.sendRedirect("/home");
     }
 
-    private void edit(HttpServletRequest request, HttpServletResponse response) {
+    private void edit(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        int studentId = Integer.parseInt(request.getParameter("studentId"));
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+        int classId = Integer.parseInt(request.getParameter("classId"));
+        Lop clazz = classService.findById(classId);
+        studentService.update(new Student(studentId,name,clazz,age));
+        response.sendRedirect("/home");
     }
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {

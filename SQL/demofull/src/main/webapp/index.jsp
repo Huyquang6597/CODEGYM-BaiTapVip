@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/students?act=create">Add Student</a>
@@ -82,7 +82,12 @@
                         <td>${st.clazz.name}</td>
                         <td>
                             <a class="btn btn-Primary" href="/students?act=view&id=${st.id}">View</a>
-                            <a class="btn btn-secondary">Sửa</a>
+                            <form action="/students" method="post" id="edit${st.id}" style="display: inline">
+                                <input type="hidden" name="act" value="edit">
+                                <input type="hidden"  name="id" value="${st.id}">
+                                <a class="btn btn-secondary" href="/students?act=edit&id=${st.id}">Sửa</a>
+                            </form>
+
                             <form action = "/students" method="post" id="delete${st.id}" style="display: inline">
                                 <input type="hidden" name="act" value="delete">
                                 <input type="hidden" name="id" value="${st.id}">
