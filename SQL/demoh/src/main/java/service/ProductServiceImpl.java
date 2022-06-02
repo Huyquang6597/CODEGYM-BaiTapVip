@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
                 Category category = categoryService.findById(categoryId);
 
 
-                products.add(new Product(id, name,price,quantity,categoryId,description,color,category));
+                products.add(new Product(id, name, price, quantity, description, color, category));
             }
         } catch (SQLException e) {
 
@@ -53,7 +53,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void add(Product product) throws SQLException {
+        try (Connection connection = getConnection();
 
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into product(productName,price,quantity,categoryId,description,color)values (?,?,?,?,?,?)");) {
+            preparedStatement.setString(1, product.getName());
+            preparedStatement.setDouble(2, product.getPrice());
+            preparedStatement.setInt(3, product.getQuantity());
+            preparedStatement.setInt(4, product.getCategory().getId());
+            preparedStatement.setString(5, product.getDescription());
+            preparedStatement.setString(6, product.getColor());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+
+        }
     }
 
     @Override
@@ -74,7 +86,7 @@ public class ProductServiceImpl implements ProductService {
                 String color = rs.getString("color");
                 Category category = categoryService.findById(categoryId);
 
-                product = (new Product(id,productName, price, quantity, categoryId,description,color,category));
+                product = (new Product(id, productName, price, quantity, description, color, category));
             }
         } catch (SQLException e) {
 
@@ -99,6 +111,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllOrderByAge() {
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllByCategory(int categoryId) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllByNameContains(String name) {
         return null;
     }
 }

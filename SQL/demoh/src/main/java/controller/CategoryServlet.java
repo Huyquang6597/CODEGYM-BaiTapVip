@@ -24,12 +24,15 @@ public class CategoryServlet extends HttpServlet {
         }
 
         switch (act) {
+
             default:
                 showList(request,response);
                 break;
 
         }
     }
+
+
 
     private void showList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("category/list.jsp");
@@ -49,6 +52,9 @@ public class CategoryServlet extends HttpServlet {
 
         switch (act) {
 
+
         }
     }
+
+
 }
