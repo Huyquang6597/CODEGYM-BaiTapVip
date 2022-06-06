@@ -7,7 +7,7 @@
 <body>
 List Student
 <c:forEach items="${list}" var="pr">
-    <h1>${pr.name},${pr.price},${pr.quantity},${pr.categoryId}, ${pr.description},${pr.color},${pr.category.name}</h1>
+    <h1>${pr.id},${pr.name},${pr.price},${pr.quantity}, ${pr.description},${pr.color},${pr.category.name}</h1>
 </c:forEach>
 </body>
 </html>

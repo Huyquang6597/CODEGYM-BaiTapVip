@@ -1,22 +1,23 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-<form method="post">
-  <input type="text" name="name">
-  <input type="number" name="price">
-  <input type="number" name="quantity">
-  <input type="text" name="color">
-  <select name="categoryId">
-  <c:forEach items="${category}" var="ca">
-    <option value="${ca.id}">${ca.name}</option>
-  </c:forEach>
-  </select>
-</form>
-</body>
-</html>
+<%--<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%--<html>--%>
+<%--<head>--%>
+<%--    <title>Title</title>--%>
+<%--</head>--%>
+<%--<body>--%>
+<%--<form method="post">--%>
+<%--  <input type="text" name="name">--%>
+<%--  <input type="number" name="price">--%>
+<%--  <input type="number" name="quantity">--%>
+<%--  <input type="text" name="color">--%>
+<%--  <select name="categoryId">--%>
+<%--  <c:forEach items="${category}" var="ca">--%>
+<%--    <option value="${ca.id}">${ca.name}</option>--%>
+<%--  </c:forEach>--%>
+<%--  </select>--%>
+<%--</form>--%>
+<%--</body>--%>
+<%--</html>--%>
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -80,13 +81,13 @@
   </div>
   <div class="row">
     <div class="col-3 text-center">
-      <h2 class="mb-3">Danh mục sản phẩm</h2>
+      <h2 class="mb-3">Category list</h2>
       <c:forEach items="${categories}" var="ca">
         <h5><a href="">${ca.name}</a></h5>
       </c:forEach>
     </div>
     <div class="col-9 text-center">
-      <h2 style="text-align: center" > Thêm sản phẩm</h2>
+      <h2 style="text-align: center" > Add new product</h2>
 <%--      <table class="table table-striped">--%>
 <%--        <thead>--%>
 <%--        <tr>--%>
@@ -118,25 +119,26 @@
 <%--        </tbody>--%>
 <%--      </table>--%>
 <form method="post">
-  <h5>Tên Sp: </h5>
+  <h5>Product Id: </h5>
+  <input class="form-control" type="int" name="id">
+  <h5>Product Name: </h5>
   <input class="form-control" type="text" name="name">
-  <h5>Giá: </h5>
+  <h5>Price: </h5>
   <input class="form-control" type="double" name="price">
-  <h5>Số lượng: </h5>
+  <h5>Quantity: </h5>
   <input class="form-control" type="int" name="quantity">
-  <h5>Màu: </h5>
+  <h5>Color: </h5>
   <input class="form-control" type="int" name="color">
-  <h5>Lớp: </h5>
+  <h5>Category Name: </h5>
   <select class="form-control" name="categoryId" >
     <c:forEach items="${categories}" var="ca">
       <option value="${ca.id}">${ca.name}</option>
     </c:forEach>
   </select>
-  <button class="btn btn-primary mt-3">Thêm</button>
+  <button class="btn btn-primary mt-3">ADD</button>
 </form>
     </div>
   </div>
-</div>
 </div>
 </body>
 </html>

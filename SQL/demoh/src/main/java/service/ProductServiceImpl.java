@@ -55,13 +55,14 @@ public class ProductServiceImpl implements ProductService {
     public void add(Product product) throws SQLException {
         try (Connection connection = getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into product(productName,price,quantity,categoryId,description,color)values (?,?,?,?,?,?)");) {
-            preparedStatement.setString(1, product.getName());
-            preparedStatement.setDouble(2, product.getPrice());
-            preparedStatement.setInt(3, product.getQuantity());
-            preparedStatement.setInt(4, product.getCategory().getId());
-            preparedStatement.setString(5, product.getDescription());
-            preparedStatement.setString(6, product.getColor());
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into product(id,productName,price,quantity,categoryId,description,color)values (?,?,?,?,?,?,?)");) {
+            preparedStatement.setInt(1,product.getId());
+            preparedStatement.setString(2, product.getName());
+            preparedStatement.setDouble(3, product.getPrice());
+            preparedStatement.setInt(4, product.getQuantity());
+            preparedStatement.setInt(5, product.getCategory().getId());
+            preparedStatement.setString(6, product.getDescription());
+            preparedStatement.setString(7, product.getColor());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
 
@@ -96,12 +97,31 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean update(Product product) throws SQLException {
-        return false;
-    }
+            try (Connection connection = getConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement("update product set productName = ?, price = ?, quantity = ?, categoryId = ?, description = ?, color = ? where id = ?");) {
+
+                preparedStatement.setString(1, product.getName());
+                preparedStatement.setDouble(2, product.getPrice());
+                preparedStatement.setInt(3, product.getQuantity());
+                preparedStatement.setInt(4, product.getCategory().getId());
+                preparedStatement.setString(5, product.getDescription());
+                preparedStatement.setString(6, product.getColor());
+                preparedStatement.setInt(7,product.getId());
+                System.out.println(preparedStatement);
+                preparedStatement.executeUpdate();
+            }
+            return false;
+        }
+
 
     @Override
     public boolean delete(int id) throws SQLException {
-        return false;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("delete from Product where id =  ?");) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } return false;
     }
 
     @Override
@@ -116,11 +136,53 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllByCategory(int categoryId) {
-        return null;
+        List<Product> productList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where categoryId = ?");) {
+            preparedStatement.setInt(1, categoryId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("productName");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                int categoriesId = rs.getInt("categoryId");
+                String description = rs.getString("description");
+                String color = rs.getString("color");
+                Category category = categoryService.findById(categoriesId);
+
+                productList.add(new Product(id,name, price, quantity,description,color,category));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return productList;
     }
 
     @Override
-    public List<Product> findAllByNameContains(String name) {
-        return null;
-    }
+    public List<Product> findAllByNameContains(String findName) {
+        List<Product> productList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where productName like ?");) {
+            preparedStatement.setString(1, "%" + findName + "%");
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("productName");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                int categoryId = rs.getInt("categoryId");
+                String description = rs.getString("description");
+                String color = rs.getString("color");
+                Category category = categoryService.findById(categoryId);
+
+                productList.add(new Product(id, name, price, quantity, description, color, category));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return productList;
+        }
 }

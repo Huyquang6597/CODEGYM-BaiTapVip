@@ -49,8 +49,8 @@
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <form class="form-inline my-2 my-lg-0" action="/home">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="findName">
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
@@ -59,70 +59,37 @@
     </div>
     <div class="row">
         <div class="col-3 text-center">
-            <h2 class="mb-3">Category List</h2>
+            <h2 class="mb-3"> Category List</h2>
             <c:forEach items="${categories}" var="ca">
                 <h5><a href="/home?categoryId=${ca.id}">${ca.name}</a></h5>
             </c:forEach>
         </div>
-        <div class="col-9 text-center">
-            <h2 class="mb-3">Product List</h2>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Product ID</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <%--                        <th scope="col">Description</th>--%>
-                    <th scope="col">Color</th>
-                    <th scope="col">Category Name</th>
+        <div class="col-9">
+            <h2 style="text-align: center"> Update product information</h2>
 
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${products}" var="pr">
-                    <tr>
-                        <td>${pr.id}</td>
-                        <td>${pr.name}</td>
-                        <td>${pr.price}</td>
-                        <td>${pr.quantity}</td>
-                            <%--<td>${pr.categoryId}</td>--%>
-                            <%--<td>${pr.description}</td>--%>
-                        <td>${pr.color}</td>
-                        <td>${pr.category.name}</td>
-                        <td >
-                            <form action="/products" method="post" id="view${pr.id}" style="display: inline">
-                                <input type="hidden" name="act" value="view">
-                                <input type="hidden"  name="id" value="${pr.id}">
-                                <a class="btn btn-primary" href="/products?act=view&id=${pr.id}">View</a>
-                            </form>
-
-                            <form action="/products" method="post" id="update${pr.id}" style="display: inline">
-                                <input type="hidden" name="act" value="update">
-                                <input type="hidden"  name="id" value="${pr.id}">
-                                <a class="btn btn-secondary" href="/products?act=update&id=${pr.id}">Update</a>
-                            </form>
-
-                            <form action = "/products" method="post" id="delete${pr.id}" style="display: inline">
-                                <input type="hidden" name="act" value="delete">
-                                <input type="hidden" name="id" value="${pr.id}">
-                                <a class="btn btn-danger" onclick="xacNhanDelete(${pr.id})">Delete</a>
-                            </form>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-
+            <form method="post">
+                <input class="form-control" type="hidden" name="id" value="${product.id}">
+<%--                <h5>Product Id: </h5>--%>
+<%--                <input class="form-control" type="int" name="id">--%>
+                <h5>Product Name: </h5>
+                <input class="form-control" type="text" name="name">
+                <h5>Price: </h5>
+                <input class="form-control" type="double" name="price">
+                <h5>Quantity: </h5>
+                <input class="form-control" type="int" name="quantity">
+                <h5>Color: </h5>
+                <input class="form-control" type="int" name="color">
+                <h5>Category Name: </h5>
+                <select class="form-control" name="categoryId" >
+                    <c:forEach items="${categories}" var="ca">
+                        <option value="${ca.id}">${ca.name}</option>
+                    </c:forEach>
+                </select>
+                <button class="btn btn-primary mt-3">Update</button>
+            </form>
         </div>
+
     </div>
 </div>
-<script>
-    function xacNhanDelete(id) {
-        if (confirm("Are you sure want to delete?")) {
-            document.getElementById("delete" + id).submit();
-        }
-    }
-</script>
 </body>
 </html>
