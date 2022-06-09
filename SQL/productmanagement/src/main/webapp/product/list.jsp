@@ -14,10 +14,13 @@
 <body>
 <h1>Danh sách sản phẩm</h1>
 <a href="/products?action=create">Tạo mới sản phẩm</a>
+<br>
+<a href="/products?action=search">Tìm kiếm sản phẩm</a>
 <c:forEach items='${danhSach}' var="sanPham">
 <h3>${sanPham.id}, ${sanPham.name}, ${sanPham.price}  <a href="/products?action=edit&id=${sanPham.id}">Sửa</a>
     <a href="/products?action=delete&id=${sanPham.id}">Xóa</a>
 </h3>
+
 </c:forEach>
 </body>
 </html>

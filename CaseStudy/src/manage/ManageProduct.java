@@ -37,7 +37,7 @@ public class ManageProduct {
 
     public int findIndexById(int id) {
         for (int i = 0; i < productList.size(); i++) {
-            if (productList.get(i).getProductid() == id) {
+            if (productList.get(i).getProductId() == id) {
                 return i;
             }
         }

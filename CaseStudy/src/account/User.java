@@ -31,7 +31,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Information :" + '\n' +
                 "UserName: '" + userName + '\'' +
                 ", PassWord: '" + passWord + '\'' +
                 '}';

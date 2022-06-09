@@ -6,10 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
-    List<Product> products;
+    List<Product> products = new ArrayList<>();
+
+    public List<Product> getProducts() {
+        return products;
+    }
 
     public ProductServiceImpl() {
-        products = new ArrayList<>();
+
         products.add(new Product(1, "IP", 30000));
         products.add(new Product(2, "SS", 40000));
         products.add(new Product(3, "XM", 50000));

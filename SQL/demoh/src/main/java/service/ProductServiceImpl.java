@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from product");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product ");) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -185,4 +185,32 @@ public class ProductServiceImpl implements ProductService {
         }
         return productList;
         }
+
+    @Override
+    public List<Product> findAllByPrice(double start , double end) {
+        List<Product> productList = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product where price between ? and ?");) {
+            preparedStatement.setDouble(1, start);
+            preparedStatement.setDouble(2, end);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("productName");
+                double price = rs.getDouble("price");
+                int quantity = rs.getInt("quantity");
+                int categoryId = rs.getInt("categoryId");
+                String description = rs.getString("description");
+                String color = rs.getString("color");
+                Category category = categoryService.findById(categoryId);
+
+                productList.add(new Product(id, name, price, quantity, description, color, category));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return productList;
+
+    }
 }

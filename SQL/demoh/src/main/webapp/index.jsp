@@ -53,6 +53,11 @@
                         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="findName">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
+                    <form class="form-inline my-2 my-lg-0" action="/home">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="start">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="end">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search By Price</button>
+                    </form>
                 </div>
             </nav>
         </div>
@@ -90,7 +95,14 @@
                             <%--<td>${pr.description}</td>--%>
                         <td>${pr.color}</td>
                         <td>${pr.category.name}</td>
-                        <td >
+
+                        <td> <c:if test="${pr.price > 200}">
+                             Khuyến mãi 10%
+                        </c:if>
+                            <c:if test="${pr.price < 200}">
+                                 Khuyến mãi 20%
+                            </c:if></td>
+                        <td>
                             <form action="/products" method="post" id="view${pr.id}" style="display: inline">
                                 <input type="hidden" name="act" value="view">
                                 <input type="hidden"  name="id" value="${pr.id}">
@@ -110,8 +122,10 @@
                             </form>
                         </td>
                     </tr>
+
                 </c:forEach>
                 </tbody>
+
             </table>
 
         </div>

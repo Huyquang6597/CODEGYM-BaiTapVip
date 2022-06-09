@@ -190,6 +190,7 @@ public class Menu {
 
     public void menuReadFromFile() throws IOException {
         writeAndReadFile.readFileUser("/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/FinalExam_MD2/src/file/User.csv", manageUser.getUserList());
+
         menuMain();
 
     }

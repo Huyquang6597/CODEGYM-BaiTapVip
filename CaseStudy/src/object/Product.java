@@ -1,7 +1,7 @@
 package object;
 
 public class Product {
-    private  int productid;
+    private  int productId;
     private String productName;
     private String manufactureDate; //ngày sx
     private String expireDate;
@@ -11,8 +11,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productid, String productName,  String manufactureDate, String expireDate, int quantity, String description) {
-        this.productid = productid;
+    public Product(int productId, String productName,  String manufactureDate, String expireDate, int quantity, String description) {
+        this.productId = productId;
         this.productName = productName;
         this.manufactureDate = manufactureDate;
         this.expireDate = expireDate;
@@ -21,12 +21,12 @@ public class Product {
     }
 
 
-    public int getProductid() {
-        return productid;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProductid(int productid) {
-        this.productid = productid;
+    public void setProductId(int productid) {
+        this.productId = productid;
     }
 
     public String getProductName() {
@@ -72,8 +72,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "Product Id: " + productid +
+        return "Product Information : " +
+                "Product Id: " + productId +
                 ", Product name: '" + productName + '\'' +
                 ", Product manufacture date: " + manufactureDate +
                 ", Product expiration date: " + expireDate +

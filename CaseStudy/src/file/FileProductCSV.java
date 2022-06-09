@@ -34,12 +34,12 @@ public class FileProductCSV {
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
         String line = "PRODUCTID , PRODUCTNAME , PRODUCTMANUFACTUREDATE , PRODUCTEXPIREDDATE , PRODUCTQUANTITY , PRODUCTDESCRIPTION  \n";
         for (Product p : productList) {
-            line += p.getProductid() + ","
+            line += p.getProductId() + ","
                     + p.getProductName() + ","
                     + p.getManufactureDate() + ","
                     + p.getExpireDate() + ","
                     + p.getQuantity() + ","
-                    + p.getDescription() + "," + "\n";
+                    + p.getDescription()  + "\n";
         }
         bufferedWriter.write(line);
         bufferedWriter.close();

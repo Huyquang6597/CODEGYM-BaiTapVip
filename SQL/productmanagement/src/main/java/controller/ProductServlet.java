@@ -7,10 +7,13 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/products")
 public class ProductServlet extends HttpServlet {
+
+    ProductServiceImpl productService = new ProductServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -27,9 +30,20 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 showDeleteForm(request, response);
                 break;
+            case "search":
+                showSearchForm(request, response);
+                break;
             default:
                 showListPage(request, response);
         }
+    }
+
+    private void showSearchForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product/search.jsp");
+//        int id = Integer.parseInt(request.getParameter("id"));
+//        Product product = productService.findById(id);
+//        request.setAttribute("spCanTim", product);
+        requestDispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -76,16 +90,26 @@ public class ProductServlet extends HttpServlet {
             case "delete":
                 deleteProduct(request,response);
                 break;
+            case "search":
+                searchProduct(request,response);
+                break;
 
         }
 
 
     }
 
+    private void searchProduct(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("id"));
+       int index =  productService.findIndexById(id);
+//        response.sendRedirect("/products");
+        request.setAttribute("index", index);
+        request.setAttribute("list", productService.getProducts());
+        request.getRequestDispatcher("list.jsp").forward(request,response);
+    }
+
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-//        String name = request.getParameter("name");
-//        int price = Integer.parseInt(request.getParameter("price"));
         productService.delete(id);
         response.sendRedirect("/products");
     }
@@ -106,5 +130,5 @@ public class ProductServlet extends HttpServlet {
         response.sendRedirect("/products");
     }
 
-    ProductServiceImpl productService = new ProductServiceImpl();
+//    ProductServiceImpl productService = new ProductServiceImpl();
 }

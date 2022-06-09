@@ -178,13 +178,13 @@ public class Menu {
             scanner.nextLine();
             if (choice < 0 || choice > 5) {
                 System.out.println("This function is not available, please re-enter the selection !");
-                menuAccount();
+                menuProduct();
             }
         } catch (InputMismatchException e) {
-            System.out.println("Please enter only numbers 0 to 3 to access the function !");
+            System.out.println("Please enter only numbers 1 to 5 to access the function , 0 to exit !");
             scanner.nextLine();
             choice = -1;
-            menuAccount();
+            menuProduct();
         }
         switch (choice) {
             case 1:
