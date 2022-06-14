@@ -33,6 +33,9 @@ public class CaculatorController {
                     result = first * second;
                     break;
                 case "/":
+                    if(second == 0){
+                        throw new ArithmeticException("Không chia được cho số 0");
+                    }
                     result = first / second;
                     break;
             }
