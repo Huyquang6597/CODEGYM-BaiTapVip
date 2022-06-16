@@ -3,12 +3,11 @@ package controller;
 import model.Province;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.IProvinceService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/provinces")
@@ -48,11 +47,31 @@ public class ProvinceController {
     @PostMapping("/edit/{id}")
     public ModelAndView update(@PathVariable Long id , Province province) {
         ModelAndView modelAndView = new ModelAndView("redirect:/provinces");
-        Province oldProvince = provinceService.findById(id).get();
-        oldProvince.setDescription(province.getDescription());
-        oldProvince.setName(province.getName());
-        provinceService.save(oldProvince);
+//        Province oldProvince = provinceService.findById(id).get();
+//        oldProvince.setDescription(province.getDescription());
+//        oldProvince.setName(province.getName());
+        provinceService.save(province);
         return modelAndView;
     }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView showDeleteForm(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("/province/delete");
+        Province province = provinceService.findById(id).get();
+        modelAndView.addObject("pro",province);
+        return modelAndView;
+    }
+
+    @PostMapping("/delete/{id}")
+    public ModelAndView update(@PathVariable Long id ) {
+        ModelAndView modelAndView = new ModelAndView("redirect:/provinces");
+//        Province oldProvince = provinceService.findById(id).get();
+//        oldProvince.setDescription(province.getDescription());
+//        oldProvince.setName(province.getName());
+        provinceService.remove(id);
+        return modelAndView;
+    }
+
+
 
 }
