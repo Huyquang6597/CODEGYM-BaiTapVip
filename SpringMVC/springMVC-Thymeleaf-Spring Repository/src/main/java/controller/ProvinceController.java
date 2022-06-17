@@ -30,6 +30,7 @@ public class ProvinceController {
     }
 
     @PostMapping("/create")
+
     public ModelAndView save(Province province) {
         provinceService.save(province);
         ModelAndView modelAndView = new ModelAndView("redirect:/provinces");
