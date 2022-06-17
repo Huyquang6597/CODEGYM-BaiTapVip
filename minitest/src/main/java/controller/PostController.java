@@ -70,10 +70,11 @@ public class PostController {
         modelAndView.addObject("posts", postService.findByTitle(title));
         return modelAndView;
     }
+
     @PostMapping("/post-asc")
     public ModelAndView newPost() {
         Iterable<Post> posts = postService.showListPostAsc();
-        ModelAndView modelAndView = new ModelAndView("/postListAsc");
+        ModelAndView modelAndView = new ModelAndView("/post/postListAsc");
         modelAndView.addObject("posts", posts);
         return modelAndView;
     }
@@ -81,7 +82,7 @@ public class PostController {
     @PostMapping("/post-top4-new")
     public ModelAndView newPostTop4() {
         Iterable<Post> posts = postService.showTop4New();
-        ModelAndView modelAndView = new ModelAndView("/postTop4New");
+        ModelAndView modelAndView = new ModelAndView("/post/postTop4New");
         modelAndView.addObject("posts", posts);
         return modelAndView;
     }

@@ -15,7 +15,7 @@
         <th>Content</th>
         <th>Likes</th>
         <th>Create At</th>
-        <th>Edit</th>
+<!--        <th>Edit</th>-->
     </tr>
     <th:block th:each="po : ${posts}">
         <tr>
@@ -23,7 +23,7 @@
             <td th:text="${po.content}"></td>
             <td th:text="${po.likes}"></td>
             <td th:text="${po.createAt}"></td>
-            <td><a th:href="@{/edit-post/__${po.id}__ }">Edit</a></td>
+<!--            <td><a th:href="@{/edit-post/__${posts.id}__ }">Edit</a></td>-->
 
         </tr>
     </th:block>

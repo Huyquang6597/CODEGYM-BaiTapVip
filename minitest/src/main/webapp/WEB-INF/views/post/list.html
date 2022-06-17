@@ -15,13 +15,13 @@
 </div>
 
 <div>
-    <form th:action="@{/post-asc}" th:object="${posts}" method="post">
+    <form th:action="@{/posts/post-asc}" th:object="${posts}" method="post">
         <button>Post List Asc</button>
     </form>
 </div>
 
 <div>
-    <form th:action="@{/post-top4-new}" th:object="${posts}" method="post">
+    <form th:action="@{/posts/post-top4-new}" th:object="${posts}" method="post">
         <button>Top 4 Post mới nhất</button>
     </form>
 </div>
