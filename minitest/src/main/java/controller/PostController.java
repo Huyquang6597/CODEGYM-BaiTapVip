@@ -9,6 +9,7 @@ import service.IPostService;
 import service.impl.PostService;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/posts")
@@ -44,18 +45,25 @@ public class PostController {
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("/post/edit");
-        Post post = postService.findById(id).get();
-        modelAndView.addObject("po", post);
+        Optional<Post> post = postService.findById(id);
+        if (post.isPresent()) {
+            ModelAndView modelAndView = new ModelAndView("/post/edit");
+            modelAndView.addObject("po", post.get());
 
-        return modelAndView;
+            return modelAndView;
+        } else {
+            ModelAndView modelAndView = new ModelAndView("/error.404");
+            return modelAndView;
+        }
     }
 
     @PostMapping("/edit/{id}")
-    public ModelAndView update(@PathVariable Long id, Post post) {
+    public ModelAndView update(@PathVariable Long id , Post post) {
         post.setCreateAt(LocalDateTime.now());
         ModelAndView modelAndView = new ModelAndView("redirect:/posts");
         postService.save(post);
+//        modelAndView.addObject("post", post);
+//        modelAndView.addObject("message", "Post updated successfully");
         return modelAndView;
     }
     @GetMapping("/search")
