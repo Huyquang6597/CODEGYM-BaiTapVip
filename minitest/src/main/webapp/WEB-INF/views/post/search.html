@@ -6,16 +6,26 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/posts/create">Tạo mới
+<a href="/posts">Post list
 </a>
-<div th:each="po : ${posts}">
-    <span th:text="${po.title}"></span>
-    <span th:text="${po.content}"></span>
-    <span th:text="${po.createAt}"></span>
-    <span th:text="${po.likes}"></span>
-    <a th:href="@{/posts/edit/__${po.id}__}">Sửa</a>
-
-
-</div>
+<h1>Post</h1>
+<table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Create Time</th>
+        <th>Likes</th>
+        <th>Edit</th>
+    </tr>
+    <th:block th:each="po : ${posts}">
+<tr>
+    <td th:text="${po.title}"></td>
+    <td th:text="${po.content}"></td>
+    <td th:text="${po.createAt}"></td>
+    <td th:text="${po.likes}"></td>
+    <td><a th:href="@{/posts/edit/__${po.id}__}">Sửa</a></td>
+</tr>
+    </th:block>
+</table>
 </body>
 </html>

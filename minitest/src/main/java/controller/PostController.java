@@ -62,8 +62,6 @@ public class PostController {
         post.setCreateAt(LocalDateTime.now());
         ModelAndView modelAndView = new ModelAndView("redirect:/posts");
         postService.save(post);
-//        modelAndView.addObject("post", post);
-//        modelAndView.addObject("message", "Post updated successfully");
         return modelAndView;
     }
     @GetMapping("/search")

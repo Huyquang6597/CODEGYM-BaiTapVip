@@ -8,8 +8,8 @@
 <a href="/posts/create">Create new post</a>
 <h1>Post</h1>
 <div>
-    <form action="/search" method="post">
-        <input type="text" name = "post" placeholder="Nhập title">
+    <form th:action="@{/posts/search}" method="get">
+        <input type="text" name = "title" placeholder="Nhập title">
         <input type="submit" value="Search">
     </form>
 </div>
