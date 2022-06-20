@@ -2,6 +2,8 @@ package service.impl;
 
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import repository.PostRepository;
 import service.IPostService;
 
@@ -12,10 +14,14 @@ public class PostService implements IPostService {
     @Autowired
     PostRepository postRepository;
 
+
+
+
     @Override
-    public Iterable<Post> findAll() {
-        return postRepository.findAll();
+    public Page<Post> findAll(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
+
 
     @Override
     public Optional<Post> findById(Long id) {
@@ -42,4 +48,5 @@ public class PostService implements IPostService {
     public Iterable<Post> showTop4New() {
         return postRepository.findTop4New();
     }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -32,6 +33,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
+@EnableSpringDataWebSupport
 @Configuration // đánh đấu đây là file cấu hình dự án Spring
 @EnableWebMvc // đánh dấu dự án này hỗ trợ mô hình MVC
 @EnableTransactionManagement // đánh dấu dự án có hỗ trợ transaction
