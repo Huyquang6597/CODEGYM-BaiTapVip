@@ -24,7 +24,7 @@ public class PostController {
     @GetMapping
     public ModelAndView show(@PageableDefault(value = 5) Pageable pageable) {
 
-        Page<Post> posts = postService.findAll(pageable);
+        Page<Post> posts = postService.orderByCreatAt(pageable);
         ModelAndView modelAndView = new ModelAndView("/post/list");
         modelAndView.addObject("posts", posts);
         return modelAndView;
@@ -91,5 +91,6 @@ public class PostController {
         modelAndView.addObject("posts", posts);
         return modelAndView;
     }
+
 
 }

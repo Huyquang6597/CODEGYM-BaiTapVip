@@ -41,6 +41,7 @@ public class PostService implements IPostService {
     public List<Post> findByTitle(String title){
         return postRepository.findAllByTitleContaining(title);
     }
+
     public Iterable<Post> showListPostAsc() {
         return postRepository.findAllByLikesAsc();
     }
@@ -49,4 +50,7 @@ public class PostService implements IPostService {
         return postRepository.findTop4New();
     }
 
+    public Page<Post> orderByCreatAt(Pageable pageable){
+        return postRepository.findAllByOrderByCreateAt(pageable);
+    }
 }
