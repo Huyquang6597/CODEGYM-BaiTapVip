@@ -4,6 +4,9 @@ package com.example.qlmuaban.controller;
 import com.example.qlmuaban.model.Product;
 import com.example.qlmuaban.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,13 +24,13 @@ public class ProductController {
     private IProductService productService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Product>> findAllProduct(){
+    public ResponseEntity<Iterable<Product>> findAllProduct() {
         List<Product> products = (List<Product>) productService.findAll();
-        if(products.isEmpty()){
+        if (products.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(products,HttpStatus.OK);
+        return new ResponseEntity<>(products, HttpStatus.OK);
 
     }
 
@@ -65,5 +68,9 @@ public class ProductController {
         return new ResponseEntity<>(productOptional.get(), HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("greater-than-300")
+    public ResponseEntity<Page<Product>> findAllByQuantityGreaterThan300(@PageableDefault(value = 4) Pageable pageable) {
+        return new ResponseEntity<>(productService.findAllByQuantity(pageable), HttpStatus.OK);
 
+    }
 }

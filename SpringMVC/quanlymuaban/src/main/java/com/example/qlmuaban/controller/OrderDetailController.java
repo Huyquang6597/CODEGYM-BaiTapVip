@@ -29,6 +29,12 @@ public class OrderDetailController {
     @Autowired
     ProductService productService;
 
+//    @GetMapping
+//    public ResponseEntity findAll(){
+//        return new ResponseEntity<>(orderDetailService.findAll(), HttpStatus.OK);
+//    }
+
+
     @PostMapping
     public ResponseEntity<OrderDetail> create(@PathVariable Long id, @RequestBody OrderDetail orderDetail) {
 
