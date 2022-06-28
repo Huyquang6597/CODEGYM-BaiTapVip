@@ -1,0 +1,13 @@
+package com.example.springandajax;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringandajaxApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringandajaxApplication.class, args);
+    }
+
+}
