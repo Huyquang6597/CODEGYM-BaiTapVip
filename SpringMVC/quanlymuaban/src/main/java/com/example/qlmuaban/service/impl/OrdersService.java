@@ -7,6 +7,8 @@ import com.example.qlmuaban.service.IOrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +40,10 @@ public class OrdersService implements IOrdersService {
     @Override
     public Iterable<OrderDetail> findDetail(Long id) {
         return ordersRepository.findDetailByOrderId(id);
+    }
+
+    @Override
+    public List<Orders> findAllByCreateAtBetween(LocalDateTime from, LocalDateTime to) {
+         return ordersRepository.findAllByCreateAtBetween(from,to );
     }
 }

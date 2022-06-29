@@ -10,12 +10,17 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-@Controller
+@RestController
 @CrossOrigin("*")
 @RequestMapping("/api/products")
 public class ProductController {
@@ -44,7 +49,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> saveProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> saveProduct(@Valid @RequestBody Product product) {
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
@@ -70,7 +75,32 @@ public class ProductController {
 
     @GetMapping("greater-than-300")
     public ResponseEntity<Page<Product>> findAllByQuantityGreaterThan300(@PageableDefault(value = 4) Pageable pageable) {
-        return new ResponseEntity<>(productService.findAllByQuantity(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(productService.findAllByQuantityGreaterThan300(pageable), HttpStatus.OK);
 
     }
+
+    @GetMapping("find-by-name")
+    public ResponseEntity<Page<Product>> findByNameContaining(@RequestParam String name) {
+        return new ResponseEntity(productService.findAllByNameContaining(name), HttpStatus.OK);
+
+    }
+
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
+    }
+
+    //"Viết tất cả các API quản lý mua bán:
+    //- Hóa đơn có thời gian, tổng tiền, tên người mua, thời gian mua
+    //- Sản phẩm: tên, giá, số lượng
+    //- Một hóa đơn có thể mua nhiều sản phẩm với số lượng khác nhau"
 }

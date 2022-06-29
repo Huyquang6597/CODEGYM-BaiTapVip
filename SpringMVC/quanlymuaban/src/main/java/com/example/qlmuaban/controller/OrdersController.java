@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,5 +69,10 @@ public class OrdersController {
     @GetMapping("/{id}")
     public ResponseEntity<Iterable<OrderDetail>> findDetail(@PathVariable Long id) {
         return new ResponseEntity<>(ordersService.findDetail(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/find-all-creat-at-between")
+    public ResponseEntity findAllByCreatAtBetween(@RequestParam String from ,@RequestParam String to){
+     return new ResponseEntity(ordersService.findAllByCreateAtBetween(LocalDateTime.parse(from),LocalDateTime.parse(to)), HttpStatus.OK);
     }
 }

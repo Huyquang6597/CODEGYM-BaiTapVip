@@ -1,18 +1,27 @@
 package com.example.qlmuaban.model;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 
+@Component
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank (message = "not null")
     private String name;
     private double price;
+
+    @Max(value = 999, message = "Over quantity of inventory")
     private  int quantity;
 
     public Product() {
