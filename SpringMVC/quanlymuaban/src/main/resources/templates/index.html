@@ -74,32 +74,10 @@
                 </tr>
                 </thead>
                 <tbody id="list">
-
-
                 </tbody>
             </table>
+            <div id="pageable"></div>
         </div>
-
-
-        <!--        <div class="col-9">-->
-        <!--            <h3>List Order</h3>-->
-        <!--            <table class="table">-->
-        <!--                <thead>-->
-        <!--                <tr>-->
-
-        <!--                    <th scope="col">ID</th>-->
-        <!--                    <th scope="col">Name</th>-->
-        <!--                    <th scope="col">Price</th>-->
-        <!--                    <th scope="col">Quantity</th>-->
-
-        <!--                </tr>-->
-        <!--                </thead>-->
-        <!--                <tbody id="list">-->
-
-
-        <!--                </tbody>-->
-        <!--            </table>-->
-        <!--        </div>-->
     </div>
 </div>
 
@@ -115,6 +93,7 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <form id="addForm">
                     <label>Name: </label>
                     <input type="text" name="name" class="form-control">
@@ -142,20 +121,35 @@
     let tbody = document.getElementById('list');
     let searchName = document.getElementById('search-name');
     let addForm = document.getElementById('addForm');
-    loadData()
+    let pageable = document.getElementById("pageable")
+    loadData(0)
 
-    function loadData() {
+    function loadData(number) {
+
         $.ajax({
             type: "GET",
-            url: "http://localhost:8083/houses",
+            url: "http://localhost:8083/houses?page="+number,
             success: function (list) {
-                loadTableHouse(list)
+                console.log(list)
+                loadTableHouse(list.content);
+                let str = ""
+                let num = list.pageable.pageNumber
+                console.log(num)
+                if(num > 0 || num+1 === list.totalPages) {
+                    str += `<button onclick="loadData(${num-1})">Trước</button>`
+                }
+                str += `${num+1}/${list.totalPages}`
+                if(num <= 0 || num+1 !== list.totalPages) {
+                    str += `<button onclick="loadData(${num+1})">Sau</button>`
+                }
+                pageable.innerHTML = str
             }
         })
     }
 
     function loadTableHouse(list) {
         let str = "";
+        console.log(list)
         for (let i = 0; i < list.length; i++) {
             str += `<tr>
                     <th scope="row">${i + 1}</th>

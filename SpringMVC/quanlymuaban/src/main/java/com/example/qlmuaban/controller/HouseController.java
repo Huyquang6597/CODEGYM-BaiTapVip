@@ -1,23 +1,22 @@
 package com.example.qlmuaban.controller;
 
 import com.example.qlmuaban.model.House;
-import com.example.qlmuaban.model.Product;
 import com.example.qlmuaban.service.IHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -27,8 +26,8 @@ public class HouseController {
     private IHouseService houseService;
 
     @GetMapping
-    public ResponseEntity<Iterable<House>> findAllHouse() {
-        List<House> houses = (List<House>) houseService.findAll();
+    public ResponseEntity<Page<House>> findAllHouse(@PageableDefault(value = 5) Pageable pageable) {
+        Page<House> houses = houseService.findAll(pageable);
         if (houses.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

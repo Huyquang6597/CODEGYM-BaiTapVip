@@ -4,6 +4,8 @@ import com.example.qlmuaban.model.House;
 import com.example.qlmuaban.repository.IHouseRepository;
 import com.example.qlmuaban.service.IHouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,8 +16,8 @@ public class HouseService implements IHouseService {
     private IHouseRepository houseRepository;
 
     @Override
-    public Iterable<House> findAll() {
-        return houseRepository.findAll();
+    public Page<House> findAll(Pageable pageable) {
+        return houseRepository.findAll(pageable);
     }
 
     @Override
