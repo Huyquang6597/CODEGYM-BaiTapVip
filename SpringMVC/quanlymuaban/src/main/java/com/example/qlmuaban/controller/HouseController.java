@@ -43,11 +43,11 @@ public class HouseController {
 //    }
 
     @PostMapping
-    public ResponseEntity<House> saveHouse (@RequestParam("file")MultipartFile file, @Valid House house) {
+    public ResponseEntity<House> saveHouse(@RequestParam("file") MultipartFile file, House house) {
         String fileName = file.getOriginalFilename();
         house.setImage(fileName);
         try {
-            file.transferTo(new File("Users//tranquanghuy//Desktop//CODEGYM-BaiTapNew//SpringMVC//quanlymuaban//src//main//resources//templates//image//" + fileName));
+            file.transferTo(new File("/Users/tranquanghuy/Desktop/CODEGYM-BaiTapNew/SpringMVC/quanlymuaban/src/main/resources/templates/image/" + fileName));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

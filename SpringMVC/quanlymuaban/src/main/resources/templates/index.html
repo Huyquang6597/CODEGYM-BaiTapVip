@@ -132,7 +132,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="save1()">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="save1()">Save changes</button>
             </div>
         </div>
     </div>
@@ -149,12 +149,12 @@
             type: "GET",
             url: "http://localhost:8083/houses",
             success: function (list) {
-                loadTableProduct(list)
+                loadTableHouse(list)
             }
         })
     }
 
-    function loadTableProduct(list) {
+    function loadTableHouse(list) {
         let str = "";
         for (let i = 0; i < list.length; i++) {
             str += `<tr>
@@ -165,7 +165,8 @@
                     <td>${list[i].numberOfRoom}</td>
                     <td>${list[i].numberOfBedroom}</td>
                     <td>${list[i].pricePerDay}</td>
-                    <td>${list[i].image}</td>
+                    <td><img src="image/${list[i].image}" height="100px" width="100px"></td>
+
 
                 </tr>`
         }
@@ -235,8 +236,12 @@
             cache:false,
             timeout:1000000,
             success: function () {
-                findAll();
+                loadData();
+                $('#exampleModal').modal('hide');
                 addForm.reset();
+            },
+            errors: function (error){
+                console.log(error)
             }
         })
 
