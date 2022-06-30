@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +37,20 @@ public class HouseController {
 
     }
 
+//    @PostMapping
+//    public ResponseEntity<House> saveHouse(@Valid @RequestBody House house) {
+//        return new ResponseEntity<>(houseService.save(house), HttpStatus.CREATED);
+//    }
+
     @PostMapping
-    public ResponseEntity<House> saveHouse(@Valid @RequestBody House house) {
+    public ResponseEntity<House> saveHouse (@RequestParam("file")MultipartFile file, @Valid House house) {
+        String fileName = file.getOriginalFilename();
+        house.setImage(fileName);
+        try {
+            file.transferTo(new File("Users//tranquanghuy//Desktop//CODEGYM-BaiTapNew//SpringMVC//quanlymuaban//src//main//resources//templates//image//" + fileName));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
         return new ResponseEntity<>(houseService.save(house), HttpStatus.CREATED);
     }
 

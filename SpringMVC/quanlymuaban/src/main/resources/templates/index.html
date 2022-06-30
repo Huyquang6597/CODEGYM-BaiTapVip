@@ -29,7 +29,7 @@
                             <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" onclick="showAddForm()">Add</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -48,7 +48,8 @@
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-name">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                               id="search-name">
                         <button class="btn btn-outline-success my-2 my-sm-0" onclick="search()">Search</button>
                     </form>
                 </div>
@@ -57,76 +58,121 @@
     </div>
     <div class="row">
         <div class="col-9">
-                       List Product
-                        <table class="table">
-                            <thead>
-                            <tr>
+            List House
+            <table class="table">
+                <thead>
+                <tr>
 
-                                <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Number Of Room</th>
+                    <th scope="col">Number Of Bed Room</th>
+                    <th scope="col">Price per Day</th>
+                    <th scope="col">Image</th>
 
-                            </tr>
-                            </thead>
-                            <tbody id="list">
-
-
-                            </tbody>
-                        </table>
-                    </div>
+                </tr>
+                </thead>
+                <tbody id="list">
 
 
-<!--        <div class="col-9">-->
-<!--            <h3>List Order</h3>-->
-<!--            <table class="table">-->
-<!--                <thead>-->
-<!--                <tr>-->
-
-<!--                    <th scope="col">ID</th>-->
-<!--                    <th scope="col">Name</th>-->
-<!--                    <th scope="col">Price</th>-->
-<!--                    <th scope="col">Quantity</th>-->
-
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody id="list">-->
+                </tbody>
+            </table>
+        </div>
 
 
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
+        <!--        <div class="col-9">-->
+        <!--            <h3>List Order</h3>-->
+        <!--            <table class="table">-->
+        <!--                <thead>-->
+        <!--                <tr>-->
+
+        <!--                    <th scope="col">ID</th>-->
+        <!--                    <th scope="col">Name</th>-->
+        <!--                    <th scope="col">Price</th>-->
+        <!--                    <th scope="col">Quantity</th>-->
+
+        <!--                </tr>-->
+        <!--                </thead>-->
+        <!--                <tbody id="list">-->
+
+
+        <!--                </tbody>-->
+        <!--            </table>-->
+        <!--        </div>-->
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Room</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <label>Name: </label>
+                    <input type="text" name="name" class="form-control">
+                    <label>Address: </label>
+                    <input type="text" name="address" class="form-control">
+                    <label>Number Of Room: </label>
+                    <input type="number" name="numberOfRoom" class="form-control">
+                    <label>Number Of Bedroom: </label>
+                    <input type="number" name="numberOfBedroom" class="form-control">
+                    <label>Price Per Day: </label>
+                    <input type="number" name="pricePerDay" class="form-control">
+                    <label>Image: </label>
+                    <input type="file" name="file" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="save1()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     let tbody = document.getElementById('list');
     let searchName = document.getElementById('search-name');
+    let addForm = document.getElementById('addForm');
     loadData()
 
     function loadData() {
         $.ajax({
             type: "GET",
-            url: "http://localhost:8083/api/products",
+            url: "http://localhost:8083/houses",
             success: function (list) {
                 loadTableProduct(list)
             }
         })
     }
-        function loadTableProduct(list){
-            let str = "";
-            for (let i = 0; i < list.length; i++) {
-                str += `<tr>
+
+    function loadTableProduct(list) {
+        let str = "";
+        for (let i = 0; i < list.length; i++) {
+            str += `<tr>
                     <th scope="row">${i + 1}</th>
 
                     <td>${list[i].name}</td>
-                    <td>${list[i].price}</td>
-                    <td>${list[i].quantity}</td>
+                    <td>${list[i].address}</td>
+                    <td>${list[i].numberOfRoom}</td>
+                    <td>${list[i].numberOfBedroom}</td>
+                    <td>${list[i].pricePerDay}</td>
+                    <td>${list[i].image}</td>
 
                 </tr>`
         }
-            tbody.innerHTML = str;
+        tbody.innerHTML = str;
     }
-    function search(){
+
+    function search() {
 
         $.ajax({
             type: "GET",
@@ -135,7 +181,68 @@
                 loadTableProduct(list)
             }
         })
+
     }
+
+    function showAddForm() {
+        $('#exampleModal').modal('show');
+    }
+
+    // function save() {
+    //     let name = document.getElementById("address").value;
+    //     let address = document.getElementById("address").value;
+    //     let numberOfBedroom = document.getElementById("numberOfBedroom").value;
+    //     let numberOfBathroom = document.getElementById("numberOfBathroom").value;
+    //     let pricePerDay = document.getElementById("pricePerDay").value;
+    //     let image = document.getElementById("image").value;
+    //     let formData = new FormData(addForm);
+    //     let house = {
+    //         // name: formData.get('name'),
+    //         // address: formData.get('address'),
+    //         // numberOfRoom: formData.get('numberOfRoom'),
+    //         // numberOfBedroom: formData.get('numberOfBedroom'),
+    //         // pricePerDay: formData.get('pricePerDay'),
+    //         // image: formData.get('image')
+    //         content: content,
+    //         type: type,
+    //     }
+    //     $.ajax({
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-type': 'application/json',
+    //         },
+    //         type: "POST",
+    //         url: "http://localhost:8083/houses",
+    //         data: JSON.stringify(house),
+    //         success: function () {
+    //             loadData();
+    //         },
+    //         error: function (error) {
+    //             console.log(error)
+    //         }
+    //     })
+
+    function save1() {
+        let data = new FormData(addForm);
+
+        $.ajax({
+            type:"POST",
+            enctype: 'multipart/form-data',
+            url: "http://localhost:8083/houses",
+            data: data,
+            processData: false,
+            contentType: false,
+            cache:false,
+            timeout:1000000,
+            success: function () {
+                findAll();
+                addForm.reset();
+            }
+        })
+
+    }
+
+
 </script>
 </body>
 </html>
